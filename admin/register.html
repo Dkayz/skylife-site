@@ -6,6 +6,165 @@
     <title>Cadastro - Skylife Tecnologias</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .auth-card {
+            width: 100%;
+            max-width: 500px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .auth-header img {
+            max-width: 150px;
+            margin-bottom: 20px;
+        }
+        
+        .auth-header h2 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        
+        .auth-header p {
+            margin: 0;
+            color: #666;
+        }
+        
+        .auth-form .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .auth-form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .auth-form .form-control {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .auth-form .form-control:focus {
+            border-color: #0066cc;
+            outline: none;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .form-actions {
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary {
+            background-color: #0066cc;
+            color: #fff;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0052a3;
+        }
+        
+        .auth-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .auth-footer a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .error-message {
+            padding: 10px;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            border-radius: 5px;
+            color: #721c24;
+            margin-bottom: 15px;
+        }
+        
+        .password-requirements {
+            margin-top: 5px;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .password-requirements ul {
+            margin: 5px 0 0 20px;
+            padding: 0;
+        }
+        
+        .password-requirements li {
+            margin-bottom: 3px;
+        }
+        
+        .password-requirements li.valid {
+            color: #28a745;
+        }
+        
+        .password-requirements li.invalid {
+            color: #dc3545;
+        }
+        
+        .terms-checkbox {
+            display: flex;
+            align-items: flex-start;
+            margin-top: 20px;
+        }
+        
+        .terms-checkbox input {
+            margin-top: 5px;
+            margin-right: 10px;
+        }
+        
+        .terms-checkbox label {
+            font-weight: normal;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+    </style>
 </head>
 <body>
     <div class="auth-container">
@@ -16,23 +175,60 @@
                 <p>Preencha os dados abaixo para se cadastrar</p>
             </div>
             <form class="auth-form" id="registerForm">
-                <div class="form-group">
-                    <label for="name">Nome completo</label>
-                    <input type="text" id="name" class="form-control" placeholder="Seu nome completo" required>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Nome completo*</label>
+                        <input type="text" id="name" class="form-control" placeholder="Seu nome completo" required>
+                    </div>
                 </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cpf">CPF*</label>
+                        <input type="text" id="cpf" class="form-control" placeholder="000.000.000-00" required>
+                        <div id="cpf-error" class="error-message" style="display: none; margin-top: 5px;"></div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Telefone*</label>
+                        <input type="tel" id="phone" class="form-control" placeholder="(00) 00000-0000" required>
+                    </div>
+                </div>
+                
                 <div class="form-group">
-                    <label for="email">E-mail</label>
+                    <label for="email">E-mail*</label>
                     <input type="email" id="email" class="form-control" placeholder="Seu e-mail" required>
                 </div>
+                
                 <div class="form-group">
-                    <label for="password">Senha</label>
+                    <label for="password">Senha*</label>
                     <input type="password" id="password" class="form-control" placeholder="Crie uma senha" required>
+                    <div class="password-requirements">
+                        <p>Sua senha deve conter:</p>
+                        <ul>
+                            <li id="length">Pelo menos 8 caracteres</li>
+                            <li id="uppercase">Pelo menos 1 letra maiúscula</li>
+                            <li id="lowercase">Pelo menos 1 letra minúscula</li>
+                            <li id="number">Pelo menos 1 número</li>
+                            <li id="special">Pelo menos 1 caractere especial</li>
+                        </ul>
+                    </div>
                 </div>
+                
                 <div class="form-group">
-                    <label for="confirm-password">Confirme a senha</label>
+                    <label for="confirm-password">Confirme a senha*</label>
                     <input type="password" id="confirm-password" class="form-control" placeholder="Confirme sua senha" required>
                 </div>
-                <div id="registerError" class="error-message" style="display: none; color: red; margin-bottom: 15px;"></div>
+                
+                <div class="terms-checkbox">
+                    <input type="checkbox" id="terms" required>
+                    <label for="terms">
+                        Li e concordo com os <a href="../terms.html" target="_blank">Termos de Uso</a> e a <a href="../privacy.html" target="_blank">Política de Privacidade</a> da Skylife Tecnologias.
+                    </label>
+                </div>
+                
+                <div id="registerError" class="error-message" style="display: none; margin-top: 15px;"></div>
+                
                 <div class="form-actions">
                     <button type="submit" class="btn btn-primary">Cadastrar</button>
                 </div>
@@ -46,21 +242,215 @@
     <script type="module">
         import { signUp } from '../js/auth.js';
         
-        document.addEventListener('DOMContentLoaded', function( ) {
+        document.addEventListener('DOMContentLoaded', function() {
             const registerForm = document.getElementById('registerForm');
             const registerError = document.getElementById('registerError');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirm-password');
+            const cpfInput = document.getElementById('cpf');
+            const phoneInput = document.getElementById('phone');
             
+            // Validação de CPF
+            function isValidCPF(cpf) {
+                cpf = cpf.replace(/[^\d]/g, '');
+                
+                if (cpf.length !== 11 || /^(\d)\1{10}$/.test(cpf)) {
+                    return false;
+                }
+                
+                let sum = 0;
+                let remainder;
+                
+                for (let i = 1; i <= 9; i++) {
+                    sum += parseInt(cpf.substring(i-1, i)) * (11 - i);
+                }
+                
+                remainder = (sum * 10) % 11;
+                
+                if (remainder === 10 || remainder === 11) {
+                    remainder = 0;
+                }
+                
+                if (remainder !== parseInt(cpf.substring(9, 10))) {
+                    return false;
+                }
+                
+                sum = 0;
+                
+                for (let i = 1; i <= 10; i++) {
+                    sum += parseInt(cpf.substring(i-1, i)) * (12 - i);
+                }
+                
+                remainder = (sum * 10) % 11;
+                
+                if (remainder === 10 || remainder === 11) {
+                    remainder = 0;
+                }
+                
+                if (remainder !== parseInt(cpf.substring(10, 11))) {
+                    return false;
+                }
+                
+                return true;
+            }
+            
+            // Máscara para CPF
+            cpfInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 11) {
+                    value = value.slice(0, 11);
+                }
+                
+                if (value.length > 9) {
+                    value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                } else if (value.length > 6) {
+                    value = value.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
+                } else if (value.length > 3) {
+                    value = value.replace(/(\d{3})(\d{1,3})/, '$1.$2');
+                }
+                
+                e.target.value = value;
+                
+                // Validação em tempo real
+                const cpfError = document.getElementById('cpf-error');
+                
+                if (value.length === 14) {
+                    if (!isValidCPF(value)) {
+                        cpfError.textContent = 'CPF inválido. Por favor, verifique.';
+                        cpfError.style.display = 'block';
+                    } else {
+                        cpfError.style.display = 'none';
+                    }
+                } else {
+                    cpfError.style.display = 'none';
+                }
+            });
+            
+            // Máscara para telefone
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 11) {
+                    value = value.slice(0, 11);
+                }
+                
+                if (value.length > 10) {
+                    value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                } else if (value.length > 6) {
+                    value = value.replace(/(\d{2})(\d{4})(\d{1,4})/, '($1) $2-$3');
+                } else if (value.length > 2) {
+                    value = value.replace(/(\d{2})(\d{1,5})/, '($1) $2');
+                }
+                
+                e.target.value = value;
+            });
+            
+            // Validação de senha em tempo real
+            passwordInput.addEventListener('input', function() {
+                const password = passwordInput.value;
+                
+                // Validação de comprimento
+                const lengthRequirement = document.getElementById('length');
+                if (password.length >= 8) {
+                    lengthRequirement.classList.add('valid');
+                    lengthRequirement.classList.remove('invalid');
+                    lengthRequirement.innerHTML = '<i class="fas fa-check"></i> Pelo menos 8 caracteres';
+                } else {
+                    lengthRequirement.classList.add('invalid');
+                    lengthRequirement.classList.remove('valid');
+                    lengthRequirement.innerHTML = '<i class="fas fa-times"></i> Pelo menos 8 caracteres';
+                }
+                
+                // Validação de letra maiúscula
+                const uppercaseRequirement = document.getElementById('uppercase');
+                if (/[A-Z]/.test(password)) {
+                    uppercaseRequirement.classList.add('valid');
+                    uppercaseRequirement.classList.remove('invalid');
+                    uppercaseRequirement.innerHTML = '<i class="fas fa-check"></i> Pelo menos 1 letra maiúscula';
+                } else {
+                    uppercaseRequirement.classList.add('invalid');
+                    uppercaseRequirement.classList.remove('valid');
+                    uppercaseRequirement.innerHTML = '<i class="fas fa-times"></i> Pelo menos 1 letra maiúscula';
+                }
+                
+                // Validação de letra minúscula
+                const lowercaseRequirement = document.getElementById('lowercase');
+                if (/[a-z]/.test(password)) {
+                    lowercaseRequirement.classList.add('valid');
+                    lowercaseRequirement.classList.remove('invalid');
+                    lowercaseRequirement.innerHTML = '<i class="fas fa-check"></i> Pelo menos 1 letra minúscula';
+                } else {
+                    lowercaseRequirement.classList.add('invalid');
+                    lowercaseRequirement.classList.remove('valid');
+                    lowercaseRequirement.innerHTML = '<i class="fas fa-times"></i> Pelo menos 1 letra minúscula';
+                }
+                
+                // Validação de número
+                const numberRequirement = document.getElementById('number');
+                if (/[0-9]/.test(password)) {
+                    numberRequirement.classList.add('valid');
+                    numberRequirement.classList.remove('invalid');
+                    numberRequirement.innerHTML = '<i class="fas fa-check"></i> Pelo menos 1 número';
+                } else {
+                    numberRequirement.classList.add('invalid');
+                    numberRequirement.classList.remove('valid');
+                    numberRequirement.innerHTML = '<i class="fas fa-times"></i> Pelo menos 1 número';
+                }
+                
+                // Validação de caractere especial
+                const specialRequirement = document.getElementById('special');
+                if (/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                    specialRequirement.classList.add('valid');
+                    specialRequirement.classList.remove('invalid');
+                    specialRequirement.innerHTML = '<i class="fas fa-check"></i> Pelo menos 1 caractere especial';
+                } else {
+                    specialRequirement.classList.add('invalid');
+                    specialRequirement.classList.remove('valid');
+                    specialRequirement.innerHTML = '<i class="fas fa-times"></i> Pelo menos 1 caractere especial';
+                }
+            });
+            
+            // Validação do formulário no envio
             registerForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
                 
                 const name = document.getElementById('name').value;
                 const email = document.getElementById('email').value;
-                const password = document.getElementById('password').value;
-                const confirmPassword = document.getElementById('confirm-password').value;
+                const password = passwordInput.value;
+                const confirmPassword = confirmPasswordInput.value;
+                const cpf = cpfInput.value;
+                const phone = phoneInput.value;
+                const termsAccepted = document.getElementById('terms').checked;
+                
+                // Validação de CPF
+                if (!isValidCPF(cpf)) {
+                    registerError.textContent = 'CPF inválido. Por favor, verifique.';
+                    registerError.style.display = 'block';
+                    return;
+                }
                 
                 // Validação de senha
                 if (password !== confirmPassword) {
                     registerError.textContent = 'As senhas não coincidem.';
+                    registerError.style.display = 'block';
+                    return;
+                }
+                
+                // Validação de requisitos de senha
+                if (password.length < 8 || 
+                    !/[A-Z]/.test(password) || 
+                    !/[a-z]/.test(password) || 
+                    !/[0-9]/.test(password) || 
+                    !/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+                    registerError.textContent = 'Sua senha não atende a todos os requisitos de segurança.';
+                    registerError.style.display = 'block';
+                    return;
+                }
+                
+                // Validação de termos
+                if (!termsAccepted) {
+                    registerError.textContent = 'Você precisa aceitar os Termos de Uso e a Política de Privacidade.';
                     registerError.style.display = 'block';
                     return;
                 }
@@ -72,7 +462,14 @@
                 submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cadastrando...';
                 
                 try {
-                    const result = await signUp(email, password, name);
+                    // Adiciona CPF e telefone aos dados do usuário
+                    const userData = {
+                        name,
+                        cpf: cpf.replace(/\D/g, ''), // Remove caracteres não numéricos
+                        phone: phone.replace(/\D/g, '') // Remove caracteres não numéricos
+                    };
+                    
+                    const result = await signUp(email, password, userData);
                     
                     if (result.success) {
                         // Cadastro bem-sucedido, redireciona para o login

@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finalizar Compra - Skylife Tecnologias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .checkout-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .checkout-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .checkout-section {
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            padding: 25px;
+            margin-bottom: 20px;
+        }
+        
+        .checkout-section h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #0066cc;
+            outline: none;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .cart-items {
+            margin-bottom: 20px;
+        }
+        
+        .cart-item {
+            display: flex;
+            padding: 15px 0;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            margin-right: 15px;
+        }
+        
+        .cart-item-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .cart-item-price {
+            color: #0066cc;
+            font-weight: 600;
+        }
+        
+        .cart-item-quantity {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .cart-summary {
+            margin-top: 20px;
+        }
+        
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        
+        .summary-row.total {
+            font-weight: 700;
+            font-size: 18px;
+            padding-top: 10px;
+            margin-top: 10px;
+            border-top: 1px solid #eee;
+        }
+        
+        .payment-methods {
+            margin-top: 20px;
+        }
+        
+        .payment-method {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .payment-method:hover {
+            border-color: #0066cc;
+        }
+        
+        .payment-method.selected {
+            border-color: #0066cc;
+            background-color: #f0f7ff;
+        }
+        
+        .payment-method-header {
+            display: flex;
+            align-items: center;
+        }
+        
+        .payment-method-radio {
+            margin-right: 10px;
+        }
+        
+        .payment-method-icon {
+            margin-right: 10px;
+            font-size: 24px;
+            color: #0066cc;
+        }
+        
+        .payment-method-title {
+            font-weight: 600;
+        }
+        
+        .payment-method-content {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            display: none;
+        }
+        
+        .payment-method.selected .payment-method-content {
+            display: block;
+        }
+        
+        .credit-card-form {
+            margin-top: 15px;
+        }
+        
+        .pix-info {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .pix-qrcode {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .pix-code {
+            margin-top: 15px;
+            padding: 10px;
+            background-color: #f5f5f5;
+            border-radius: 5px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+        
+        .copy-button {
+            background-color: #0066cc;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        
+        .copy-button:hover {
+            background-color: #0052a3;
+        }
+        
+        .boleto-info {
+            margin: 20px 0;
+        }
+        
+        .boleto-barcode {
+            height: 80px;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background-color: #0066cc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: 20px;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0052a3;
+        }
+        
+        .btn-primary:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .address-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .address-card:hover {
+            border-color: #0066cc;
+        }
+        
+        .address-card.selected {
+            border-color: #0066cc;
+            background-color: #f0f7ff;
+        }
+        
+        .address-card-header {
+            display: flex;
+            align-items: center;
+        }
+        
+        .address-card-radio {
+            margin-right: 10px;
+        }
+        
+        .address-card-title {
+            font-weight: 600;
+        }
+        
+        .address-card-content {
+            margin-top: 10px;
+            color: #666;
+        }
+        
+        .add-address {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .add-address:hover {
+            border-color: #0066cc;
+            color: #0066cc;
+        }
+        
+        .add-address i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+        
+        .checkout-steps {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        
+        .checkout-step {
+            flex: 1;
+            text-align: center;
+            padding: 15px;
+            position: relative;
+        }
+        
+        .checkout-step:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #ddd;
+            z-index: -1;
+        }
+        
+        .step-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background-color: #ddd;
+            color: #666;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        
+        .checkout-step.active .step-number {
+            background-color: #0066cc;
+            color: white;
+        }
+        
+        .checkout-step.completed .step-number {
+            background-color: #28a745;
+            color: white;
+        }
+        
+        .step-title {
+            font-weight: 600;
+            color: #666;
+        }
+        
+        .checkout-step.active .step-title {
+            color: #0066cc;
+        }
+        
+        .checkout-step.completed .step-title {
+            color: #28a745;
+        }
+        
+        .checkout-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .btn-secondary {
+            padding: 12px 20px;
+            background-color: #f5f5f5;
+            color: #333;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #e5e5e5;
+        }
+        
+        .checkout-section:not(.active) {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="contact-info">
+                    <a href="tel:+5521966393204"><i class="fas fa-phone"></i> (21) 96639-3204</a>
+                    <a href="https://wa.me/5521960004279" target="_blank"><i class="fab fa-whatsapp"></i> (21) 96000-4279</a>
+                    <a href="mailto:contato@skylifetecnologias.com.br"><i class="fas fa-envelope"></i> contato@skylifetecnologias.com.br</a>
+                </div>
+                <div class="user-actions">
+                    <!-- Links de usuário serão atualizados dinamicamente pelo auth-manager.js -->
+                    <a href="admin/login.html"><i class="fas fa-user"></i> Minha Conta</a>
+                    <a href="admin/login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="admin/register.html"><i class="fas fa-user-plus"></i> Cadastre-se</a>
+                </div>
+            </div>
+            <div class="header-main">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo.png" alt="Skylife Tecnologias">
+                    </a>
+                </div>
+                <div class="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" placeholder="Digite o que está buscando...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="cart">
+                    <a href="cart.html">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Carrinho | <span id="cartCount">0</span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <div class="nav-menu">
+                    <ul>
+                        <li><a href="index.html">Início</a></li>
+                        <li><a href="categories/hardware.html">Hardware</a></li>
+                        <li><a href="categories/perifericos.html">Periféricos</a></li>
+                        <li><a href="categories/notebooks.html">Notebooks</a></li>
+                        <li><a href="categories/smartphones.html">Smartphones</a></li>
+                        <li><a href="pc-builder.html">Monte seu PC</a></li>
+                        <li><a href="support.html">Suporte</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <div class="checkout-steps">
+            <div class="checkout-step active" id="step-1">
+                <div class="step-number">1</div>
+                <div class="step-title">Endereço</div>
+            </div>
+            <div class="checkout-step" id="step-2">
+                <div class="step-number">2</div>
+                <div class="step-title">Pagamento</div>
+            </div>
+            <div class="checkout-step" id="step-3">
+                <div class="step-number">3</div>
+                <div class="step-title">Confirmação</div>
+            </div>
+        </div>
+        
+        <div class="checkout-container">
+            <div class="checkout-left">
+                <!-- Etapa 1: Endereço -->
+                <div class="checkout-section active" id="address-section">
+                    <h2>Endereço de Entrega</h2>
+                    
+                    <div class="address-card selected">
+                        <div class="address-card-header">
+                            <input type="radio" name="address" id="address-1" class="address-card-radio" checked>
+                            <label for="address-1" class="address-card-title">Casa</label>
+                        </div>
+                        <div class="address-card-content">
+                            <p>Rua Exemplo, 123</p>
+                            <p>Bairro Exemplo</p>
+                            <p>Rio de Janeiro - RJ</p>
+                            <p>CEP: 20000-000</p>
+                        </div>
+                    </div>
+                    
+                    <div class="address-card">
+                        <div class="address-card-header">
+                            <input type="radio" name="address" id="address-2" class="address-card-radio">
+                            <label for="address-2" class="address-card-title">Trabalho</label>
+                        </div>
+                        <div class="address-card-content">
+                            <p>Av. Exemplo, 456</p>
+                            <p>Centro</p>
+                            <p>Rio de Janeiro - RJ</p>
+                            <p>CEP: 20010-000</p>
+                        </div>
+                    </div>
+                    
+                    <div class="add-address" id="add-address-btn">
+                        <i class="fas fa-plus"></i> Adicionar Novo Endereço
+                    </div>
+                    
+                    <div id="new-address-form" style="display: none;">
+                        <h3>Novo Endereço</h3>
+                        
+                        <div class="form-group">
+                            <label for="address-name">Nome do Endereço</label>
+                            <input type="text" id="address-name" placeholder="Ex: Casa, Trabalho">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="cep">CEP</label>
+                            <input type="text" id="cep" placeholder="00000-000">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="street">Rua</label>
+                                <input type="text" id="street">
+                            </div>
+                            <div class="form-group" style="flex: 0 0 100px;">
+                                <label for="number">Número</label>
+                                <input type="text" id="number">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="complement">Complemento</label>
+                            <input type="text" id="complement" placeholder="Opcional">
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="neighborhood">Bairro</label>
+                                <input type="text" id="neighborhood">
+                            </div>
+                            <div class="form-group">
+                                <label for="city">Cidade</label>
+                                <input type="text" id="city">
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="state">Estado</label>
+                            <select id="state">
+                                <option value="">Selecione</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-row">
+                            <button type="button" class="btn-secondary" id="cancel-address-btn">Cancelar</button>
+                            <button type="button" class="btn-primary" id="save-address-btn">Salvar Endereço</button>
+                        </div>
+                    </div>
+                    
+                    <div class="checkout-navigation">
+                        <a href="cart.html" class="btn-secondary">Voltar para o Carrinho</a>
+                        <button type="button" class="btn-primary" id="address-next-btn">Continuar para Pagamento</button>
+                    </div>
+                </div>
+                
+                <!-- Etapa 2: Pagamento -->
+                <div class="checkout-section" id="payment-section">
+                    <h2>Forma de Pagamento</h2>
+                    
+                    <div class="payment-methods">
+                        <div class="payment-method" data-method="credit-card">
+                            <div class="payment-method-header">
+                                <input type="radio" name="payment" id="credit-card" class="payment-method-radio">
+                                <div class="payment-method-icon">
+                                    <i class="fas fa-credit-card"></i>
+                                </div>
+                                <div class="payment-method-title">Cartão de Crédito</div>
+                            </div>
+                            <div class="payment-method-content">
+                                <div class="credit-card-form">
+                                    <div class="form-group">
+                                        <label for="card-number">Número do Cartão</label>
+                                        <input type="text" id="card-number" placeholder="0000 0000 0000 0000">
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="card-name">Nome no Cartão</label>
+                                            <input type="text" id="card-name" placeholder="Como está impresso no cartão">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-row">
+                                        <div class="form-group">
+                                            <label for="card-expiry">Validade</label>
+                                            <input type="text" id="card-expiry" placeholder="MM/AA">
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="card-cvv">CVV</label>
+                                            <input type="text" id="card-cvv" placeholder="123">
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="form-group">
+                                        <label for="card-installments">Parcelas</label>
+                                        <select id="card-installments">
+                                            <option value="1">1x de R$1.999,80 sem juros</option>
+                                            <option value="2">2x de R$999,90 sem juros</option>
+                                            <option value="3">3x de R$666,60 sem juros</option>
+                                            <option value="4">4x de R$499,95 sem juros</option>
+                                            <option value="5">5x de R$399,96 sem juros</option>
+                                            <option value="6">6x de R$333,30 sem juros</option>
+                                            <option value="7">7x de R$285,69 sem juros</option>
+                                            <option value="8">8x de R$249,98 sem juros</option>
+                                            <option value="9">9x de R$222,20 sem juros</option>
+                                            <option value="10">10x de R$199,98 sem juros</option>
+                                            <option value="11">11x de R$181,80 sem juros</option>
+                                            <option value="12">12x de R$166,65 sem juros</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-method" data-method="pix">
+                            <div class="payment-method-header">
+                                <input type="radio" name="payment" id="pix" class="payment-method-radio">
+                                <div class="payment-method-icon">
+                                    <i class="fas fa-qrcode"></i>
+                                </div>
+                                <div class="payment-method-title">PIX</div>
+                            </div>
+                            <div class="payment-method-content">
+                                <div class="pix-info">
+                                    <p>Escaneie o QR Code abaixo ou copie o código PIX para pagar:</p>
+                                    <div class="pix-qrcode">
+                                        <i class="fas fa-qrcode" style="font-size: 100px; color: #ddd;"></i>
+                                    </div>
+                                    <p>Ou copie o código PIX:</p>
+                                    <div class="pix-code">
+                                        00020126580014BR.GOV.BCB.PIX0136a629534e-7e14-43ff-af5f-4de65f234a6e5204000053039865802BR5925SKYLIFE TECNOLOGIAS LTDA6009SAO PAULO62070503***63041D14
+                                    </div>
+                                    <button class="copy-button" id="copy-pix-btn">
+                                        <i class="fas fa-copy"></i> Copiar código
+                                    </button>
+                                    <p style="margin-top: 20px; font-size: 14px; color: #666;">
+                                        O pagamento via PIX é processado instantaneamente. Após o pagamento, você receberá a confirmação por e-mail.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="payment-method" data-method="boleto">
+                            <div class="payment-method-header">
+                                <input type="radio" name="payment" id="boleto" class="payment-method-radio">
+                                <div class="payment-method-icon">
+                                    <i class="fas fa-barcode"></i>
+                                </div>
+                                <div class="payment-method-title">Boleto Bancário</div>
+                            </div>
+                            <div class="payment-method-content">
+                                <div class="boleto-info">
+                                    <div class="boleto-barcode">
+                                        <i class="fas fa-barcode" style="font-size: 60px; color: #ddd;"></i>
+                                    </div>
+                                    <p>
+                                        O boleto será gerado após a confirmação do pedido e enviado para o seu e-mail.
+                                    </p>
+                                    <p>
+                                        <strong>Valor:</strong> R$1.999,80
+                                    </p>
+                                    <p>
+                                        <strong>Vencimento:</strong> 3 dias úteis após a geração
+                                    </p>
+                                    <p style="margin-top: 20px; font-size: 14px; color: #666;">
+                                        O pedido será processado após a confirmação do pagamento do boleto, o que pode levar até 3 dias úteis.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="checkout-navigation">
+                        <button type="button" class="btn-secondary" id="payment-back-btn">Voltar para Endereço</button>
+                        <button type="button" class="btn-primary" id="payment-next-btn">Revisar e Finalizar</button>
+                    </div>
+                </div>
+                
+                <!-- Etapa 3: Confirmação -->
+                <div class="checkout-section" id="confirmation-section">
+                    <h2>Revisar e Finalizar</h2>
+                    
+                    <div class="checkout-section">
+                        <h3>Endereço de Entrega</h3>
+                        <div id="confirmation-address">
+                            <p><strong>Casa</strong></p>
+                            <p>Rua Exemplo, 123</p>
+                            <p>Bairro Exemplo</p>
+                            <p>Rio de Janeiro - RJ</p>
+                            <p>CEP: 20000-000</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checkout-section">
+                        <h3>Forma de Pagamento</h3>
+                        <div id="confirmation-payment">
+                            <p><i class="fas fa-credit-card"></i> <strong>Cartão de Crédito</strong></p>
+                            <p>Final **** 1234</p>
+                            <p>12x de R$166,65 sem juros</p>
+                        </div>
+                    </div>
+                    
+                    <div class="checkout-section">
+                        <h3>Itens do Pedido</h3>
+                        <div class="cart-items">
+                            <div class="cart-item">
+                                <div class="cart-item-image">
+                                    <img src="images/avatar-default.png" alt="Processador Intel Core i5">
+                                </div>
+                                <div class="cart-item-details">
+                                    <div class="cart-item-title">Processador Intel Core i5-12400F</div>
+                                    <div class="cart-item-quantity">Quantidade: 1</div>
+                                    <div class="cart-item-price">R$1.099,90</div>
+                                </div>
+                            </div>
+                            <div class="cart-item">
+                                <div class="cart-item-image">
+                                    <img src="images/avatar-default.png" alt="Placa-mãe Asus">
+                                </div>
+                                <div class="cart-item-details">
+                                    <div class="cart-item-title">Placa-mãe Asus Prime B660M-A</div>
+                                    <div class="cart-item-quantity">Quantidade: 1</div>
+                                    <div class="cart-item-price">R$899,90</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="checkout-navigation">
+                        <button type="button" class="btn-secondary" id="confirmation-back-btn">Voltar para Pagamento</button>
+                        <button type="button" class="btn-primary" id="place-order-btn">Finalizar Compra</button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="checkout-right">
+                <div class="checkout-section">
+                    <h2>Resumo do Pedido</h2>
+                    <div class="cart-summary">
+                        <div class="summary-row">
+                            <div>Subtotal</div>
+                            <div>R$1.999,80</div>
+                        </div>
+                        <div class="summary-row">
+                            <div>Frete</div>
+                            <div>Grátis</div>
+                        </div>
+                        <div class="summary-row">
+                            <div>Desconto</div>
+                            <div>R$0,00</div>
+                        </div>
+                        <div class="summary-row total">
+                            <div>Total</div>
+                            <div>R$1.999,80</div>
+                        </div>
+                    </div>
+                    
+                    <div style="margin-top: 20px;">
+                        <div class="form-group">
+                            <label for="coupon">Cupom de Desconto</label>
+                            <div style="display: flex;">
+                                <input type="text" id="coupon" placeholder="Digite seu cupom" style="border-radius: 5px 0 0 5px;">
+                                <button type="button" style="padding: 12px 15px; background-color: #0066cc; color: white; border: none; border-radius: 0 5px 5px 0; cursor: pointer;">Aplicar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Institucional</h3>
+                    <ul>
+                        <li><a href="about.html">Quem Somos</a></li>
+                        <li><a href="terms.html">Termos e Condições</a></li>
+                        <li><a href="privacy.html">Política de Privacidade</a></li>
+                        <li><a href="blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Atendimento</h3>
+                    <ul>
+                        <li><a href="support.html">Central de Suporte</a></li>
+                        <li><a href="faq.html">Perguntas Frequentes</a></li>
+                        <li><a href="contact.html">Fale Conosco</a></li>
+                        <li><a href="returns.html">Trocas e Devoluções</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Minha Conta</h3>
+                    <ul>
+                        <li><a href="admin/login.html">Meus Pedidos</a></li>
+                        <li><a href="admin/login.html">Meus Dados</a></li>
+                        <li><a href="admin/login.html">Meus Favoritos</a></li>
+                        <li><a href="admin/login.html">Rastrear Pedido</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Formas de Pagamento</h3>
+                    <p>Cartões de Crédito, Boleto, Pix</p>
+                    <h3>Redes Sociais</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Skylife Tecnologias - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Importa o gerenciador de autenticação -->
+    <script type="module">
+        import { authManager } from './js/auth-manager.js';
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos das etapas
+            const addressSection = document.getElementById('address-section');
+            const paymentSection = document.getElementById('payment-section');
+            const confirmationSection = document.getElementById('confirmation-section');
+            
+            // Elementos dos passos
+            const step1 = document.getElementById('step-1');
+            const step2 = document.getElementById('step-2');
+            const step3 = document.getElementById('step-3');
+            
+            // Botões de navegação
+            const addressNextBtn = document.getElementById('address-next-btn');
+            const paymentBackBtn = document.getElementById('payment-back-btn');
+            const paymentNextBtn = document.getElementById('payment-next-btn');
+            const confirmationBackBtn = document.getElementById('confirmation-back-btn');
+            const placeOrderBtn = document.getElementById('place-order-btn');
+            
+            // Navegação entre etapas
+            addressNextBtn.addEventListener('click', function() {
+                addressSection.classList.remove('active');
+                paymentSection.classList.add('active');
+                
+                step1.classList.remove('active');
+                step1.classList.add('completed');
+                step2.classList.add('active');
+                
+                window.scrollTo(0, 0);
+            });
+            
+            paymentBackBtn.addEventListener('click', function() {
+                paymentSection.classList.remove('active');
+                addressSection.classList.add('active');
+                
+                step2.classList.remove('active');
+                step1.classList.remove('completed');
+                step1.classList.add('active');
+                
+                window.scrollTo(0, 0);
+            });
+            
+            paymentNextBtn.addEventListener('click', function() {
+                // Verifica se um método de pagamento foi selecionado
+                const selectedPayment = document.querySelector('input[name="payment"]:checked');
+                if (!selectedPayment) {
+                    alert('Por favor, selecione uma forma de pagamento.');
+                    return;
+                }
+                
+                paymentSection.classList.remove('active');
+                confirmationSection.classList.add('active');
+                
+                step2.classList.remove('active');
+                step2.classList.add('completed');
+                step3.classList.add('active');
+                
+                // Atualiza o resumo de pagamento na confirmação
+                updatePaymentSummary();
+                
+                window.scrollTo(0, 0);
+            });
+            
+            confirmationBackBtn.addEventListener('click', function() {
+                confirmationSection.classList.remove('active');
+                paymentSection.classList.add('active');
+                
+                step3.classList.remove('active');
+                step2.classList.remove('completed');
+                step2.classList.add('active');
+                
+                window.scrollTo(0, 0);
+            });
+            
+            placeOrderBtn.addEventListener('click', function() {
+                // Simulação de finalização de pedido
+                placeOrderBtn.disabled = true;
+                placeOrderBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processando...';
+                
+                setTimeout(function() {
+                    window.location.href = 'order-confirmation.html';
+                }, 2000);
+            });
+            
+            // Seleção de endereço
+            const addressCards = document.querySelectorAll('.address-card');
+            addressCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    // Remove a classe selected de todos os cards
+                    addressCards.forEach(c => c.classList.remove('selected'));
+                    
+                    // Adiciona a classe selected ao card clicado
+                    this.classList.add('selected');
+                    
+                    // Seleciona o radio button
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                    
+                    // Atualiza o endereço na confirmação
+                    updateAddressSummary();
+                });
+            });
+            
+            // Adicionar novo endereço
+            const addAddressBtn = document.getElementById('add-address-btn');
+            const newAddressForm = document.getElementById('new-address-form');
+            const cancelAddressBtn = document.getElementById('cancel-address-btn');
+            const saveAddressBtn = document.getElementById('save-address-btn');
+            
+            addAddressBtn.addEventListener('click', function() {
+                addAddressBtn.style.display = 'none';
+                newAddressForm.style.display = 'block';
+            });
+            
+            cancelAddressBtn.addEventListener('click', function() {
+                newAddressForm.style.display = 'none';
+                addAddressBtn.style.display = 'flex';
+            });
+            
+            saveAddressBtn.addEventListener('click', function() {
+                // Aqui você implementaria a lógica para salvar o endereço
+                alert('Endereço salvo com sucesso!');
+                
+                newAddressForm.style.display = 'none';
+                addAddressBtn.style.display = 'flex';
+            });
+            
+            // Seleção de método de pagamento
+            const paymentMethods = document.querySelectorAll('.payment-method');
+            paymentMethods.forEach(method => {
+                method.addEventListener('click', function() {
+                    // Remove a classe selected de todos os métodos
+                    paymentMethods.forEach(m => m.classList.remove('selected'));
+                    
+                    // Adiciona a classe selected ao método clicado
+                    this.classList.add('selected');
+                    
+                    // Seleciona o radio button
+                    const radio = this.querySelector('input[type="radio"]');
+                    radio.checked = true;
+                });
+            });
+            
+            // Copiar código PIX
+            const copyPixBtn = document.getElementById('copy-pix-btn');
+            copyPixBtn.addEventListener('click', function() {
+                const pixCode = document.querySelector('.pix-code').textContent.trim();
+                
+                navigator.clipboard.writeText(pixCode).then(function() {
+                    copyPixBtn.innerHTML = '<i class="fas fa-check"></i> Copiado!';
+                    
+                    setTimeout(function() {
+                        copyPixBtn.innerHTML = '<i class="fas fa-copy"></i> Copiar código';
+                    }, 2000);
+                });
+            });
+            
+            // Máscara para cartão de crédito
+            const cardNumberInput = document.getElementById('card-number');
+            cardNumberInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 16) {
+                    value = value.slice(0, 16);
+                }
+                
+                // Formata o número do cartão em grupos de 4
+                if (value.length > 0) {
+                    value = value.match(/.{1,4}/g).join(' ');
+                }
+                
+                e.target.value = value;
+            });
+            
+            // Máscara para validade do cartão
+            const cardExpiryInput = document.getElementById('card-expiry');
+            cardExpiryInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 4) {
+                    value = value.slice(0, 4);
+                }
+                
+                if (value.length > 2) {
+                    value = value.slice(0, 2) + '/' + value.slice(2);
+                }
+                
+                e.target.value = value;
+            });
+            
+            // Máscara para CVV
+            const cardCvvInput = document.getElementById('card-cvv');
+            cardCvvInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 4) {
+                    value = value.slice(0, 4);
+                }
+                
+                e.target.value = value;
+            });
+            
+            // Máscara para CEP
+            const cepInput = document.getElementById('cep');
+            cepInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 8) {
+                    value = value.slice(0, 8);
+                }
+                
+                if (value.length > 5) {
+                    value = value.slice(0, 5) + '-' + value.slice(5);
+                }
+                
+                e.target.value = value;
+            });
+            
+            // Função para atualizar o resumo de endereço na confirmação
+            function updateAddressSummary() {
+                const selectedAddress = document.querySelector('.address-card.selected');
+                if (selectedAddress) {
+                    const title = selectedAddress.querySelector('.address-card-title').textContent;
+                    const content = selectedAddress.querySelector('.address-card-content').innerHTML;
+                    
+                    document.getElementById('confirmation-address').innerHTML = `
+                        <p><strong>${title}</strong></p>
+                        ${content}
+                    `;
+                }
+            }
+            
+            // Função para atualizar o resumo de pagamento na confirmação
+            function updatePaymentSummary() {
+                const selectedPayment = document.querySelector('.payment-method.selected');
+                if (selectedPayment) {
+                    const method = selectedPayment.getAttribute('data-method');
+                    let paymentHtml = '';
+                    
+                    if (method === 'credit-card') {
+                        const cardNumber = document.getElementById('card-number').value;
+                        const lastDigits = cardNumber.slice(-4);
+                        const installments = document.getElementById('card-installments').options[document.getElementById('card-installments').selectedIndex].text;
+                        
+                        paymentHtml = `
+                            <p><i class="fas fa-credit-card"></i> <strong>Cartão de Crédito</strong></p>
+                            <p>Final ${lastDigits || '****'}</p>
+                            <p>${installments}</p>
+                        `;
+                    } else if (method === 'pix') {
+                        paymentHtml = `
+                            <p><i class="fas fa-qrcode"></i> <strong>PIX</strong></p>
+                            <p>Pagamento à vista</p>
+                            <p>R$1.999,80</p>
+                        `;
+                    } else if (method === 'boleto') {
+                        paymentHtml = `
+                            <p><i class="fas fa-barcode"></i> <strong>Boleto Bancário</strong></p>
+                            <p>Vencimento em 3 dias úteis</p>
+                            <p>R$1.999,80</p>
+                        `;
+                    }
+                    
+                    document.getElementById('confirmation-payment').innerHTML = paymentHtml;
+                }
+            }
+            
+            // Inicialização
+            updateAddressSummary();
+        });
+    </script>
+</body>
+</html>

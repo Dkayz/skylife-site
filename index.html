@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Skylife Tecnologias - Sua Loja de Informática</title>
+    <title>Skylife Tecnologias - Sua Loja de Tecnologia</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -13,14 +13,17 @@
         <div class="container">
             <div class="header-top">
                 <div class="contact-info">
-                    <a href="tel:+551199999999"><i class="fas fa-phone"></i> (11) 9999-9999</a>
+                    <a href="tel:+5521966393204"><i class="fas fa-phone"></i> (21) 96639-3204</a>
+                    <a href="https://wa.me/5521960004279" target="_blank"><i class="fab fa-whatsapp"></i> (21) 96000-4279</a>
                     <a href="mailto:contato@skylifetecnologias.com.br"><i class="fas fa-envelope"></i> contato@skylifetecnologias.com.br</a>
                 </div>
                 <div class="user-actions">
                     <!-- Links de usuário serão atualizados dinamicamente pelo auth-manager.js -->
-                    <a href="admin/login.html"><i class="fas fa-user"></i> Minha Conta</a>
-                    <a href="admin/login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
-                    <a href="admin/register.html"><i class="fas fa-user-plus"></i> Cadastre-se</a>
+                    <a href="admin/login.html" id="account-link"><i class="fas fa-user"></i> <span id="account-text">Minha Conta</span></a>
+                    <a href="admin/login.html" id="login-link"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="admin/register.html" id="register-link"><i class="fas fa-user-plus"></i> Cadastre-se</a>
+                    <a href="admin/dashboard.html" id="admin-link" style="display: none;"><i class="fas fa-tachometer-alt"></i> Painel</a>
+                    <a href="#" id="logout-link" style="display: none;"><i class="fas fa-sign-out-alt"></i> Sair</a>
                 </div>
             </div>
             <div class="header-main">
@@ -61,40 +64,382 @@
     </header>
 
     <!-- Banner Principal -->
-    <div class="banner">
-        <img src="images/banner.png" alt="Skylife Tecnologias">
-    </div>
+    <section class="main-banner">
+        <div class="container">
+            <div class="banner-content">
+                <h1>Tecnologia de ponta para você</h1>
+                <p>Encontre os melhores produtos de tecnologia com os melhores preços do mercado.</p>
+                <a href="categories/hardware.html" class="btn-primary">Ver Ofertas</a>
+            </div>
+        </div>
+    </section>
 
-    <!-- Conteúdo Principal -->
-    <main class="container">
-        <!-- Promoções -->
-        <section>
-            <div class="section-title">
-                <h2>PROMOÇÕES</h2>
-                <a href="categories/promocoes.html">Ver mais <i class="fas fa-chevron-right"></i></a>
-            </div>
-            <div class="products-grid" id="promotions-grid">
-                <div id="promotionsLoading" class="loading-indicator" style="text-align: center; padding: 30px; grid-column: 1 / -1;">
-                    <i class="fas fa-spinner fa-spin"></i> Carregando produtos...
+    <!-- Categorias em Destaque -->
+    <section class="featured-categories">
+        <div class="container">
+            <h2 class="section-title">Categorias em Destaque</h2>
+            <div class="categories-grid">
+                <div class="category-card">
+                    <a href="categories/hardware.html">
+                        <div class="category-image">
+                            <img src="images/avatar-default.png" alt="Hardware">
+                        </div>
+                        <div class="category-title">Hardware</div>
+                    </a>
                 </div>
-                <!-- Produtos serão carregados dinamicamente -->
+                <div class="category-card">
+                    <a href="categories/perifericos.html">
+                        <div class="category-image">
+                            <img src="images/avatar-default.png" alt="Periféricos">
+                        </div>
+                        <div class="category-title">Periféricos</div>
+                    </a>
+                </div>
+                <div class="category-card">
+                    <a href="categories/notebooks.html">
+                        <div class="category-image">
+                            <img src="images/avatar-default.png" alt="Notebooks">
+                        </div>
+                        <div class="category-title">Notebooks</div>
+                    </a>
+                </div>
+                <div class="category-card">
+                    <a href="categories/smartphones.html">
+                        <div class="category-image">
+                            <img src="images/avatar-default.png" alt="Smartphones">
+                        </div>
+                        <div class="category-title">Smartphones</div>
+                    </a>
+                </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Destaques -->
-        <section>
-            <div class="section-title">
-                <h2>DESTAQUES</h2>
-                <a href="categories/destaques.html">Ver mais <i class="fas fa-chevron-right"></i></a>
-            </div>
-            <div class="products-grid" id="featured-grid">
-                <div id="featuredLoading" class="loading-indicator" style="text-align: center; padding: 30px; grid-column: 1 / -1;">
-                    <i class="fas fa-spinner fa-spin"></i> Carregando produtos...
+    <!-- Produtos em Destaque -->
+    <section class="featured-products">
+        <div class="container">
+            <h2 class="section-title">Produtos em Destaque</h2>
+            <div class="products-grid" id="featuredProducts">
+                <!-- Os produtos serão carregados dinamicamente -->
+                <div class="product-card">
+                    <div class="product-badge new">Novo</div>
+                    <div class="product-image">
+                        <a href="product.html">
+                            <img src="images/avatar-default.png" alt="Processador Intel Core i5">
+                        </a>
+                    </div>
+                    <div class="product-details">
+                        <div class="product-category">Hardware</div>
+                        <h3 class="product-title">
+                            <a href="product.html">Processador Intel Core i5-12400F</a>
+                        </h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">R$1.099,90</span>
+                            <span class="old-price">R$1.299,90</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Adicionar</button>
+                            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
                 </div>
-                <!-- Produtos serão carregados dinamicamente -->
+                <div class="product-card">
+                    <div class="product-badge sale">-15%</div>
+                    <div class="product-image">
+                        <a href="product.html">
+                            <img src="images/avatar-default.png" alt="Placa-mãe Asus">
+                        </a>
+                    </div>
+                    <div class="product-details">
+                        <div class="product-category">Hardware</div>
+                        <h3 class="product-title">
+                            <a href="product.html">Placa-mãe Asus Prime B660M-A</a>
+                        </h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(4.0)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">R$899,90</span>
+                            <span class="old-price">R$1.059,90</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Adicionar</button>
+                            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <a href="product.html">
+                            <img src="images/avatar-default.png" alt="Memória RAM">
+                        </a>
+                    </div>
+                    <div class="product-details">
+                        <div class="product-category">Hardware</div>
+                        <h3 class="product-title">
+                            <a href="product.html">Memória RAM Corsair Vengeance 16GB DDR4</a>
+                        </h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(5.0)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">R$399,90</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Adicionar</button>
+                            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge new">Novo</div>
+                    <div class="product-image">
+                        <a href="product.html">
+                            <img src="images/avatar-default.png" alt="Placa de Vídeo RTX 3060">
+                        </a>
+                    </div>
+                    <div class="product-details">
+                        <div class="product-category">Hardware</div>
+                        <h3 class="product-title">
+                            <a href="product.html">Placa de Vídeo NVIDIA GeForce RTX 3060</a>
+                        </h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(4.7)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">R$2.499,90</span>
+                            <span class="old-price">R$2.799,90</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Adicionar</button>
+                            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </section>
-    </main>
+            <div class="view-more">
+                <a href="categories/hardware.html" class="btn-secondary">Ver Mais Produtos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Banners Promocionais -->
+    <section class="promo-banners">
+        <div class="container">
+            <div class="banner-grid">
+                <div class="promo-banner">
+                    <img src="images/avatar-default.png" alt="Promoção de Hardware">
+                    <div class="banner-content">
+                        <h3>Até 20% OFF em Hardware</h3>
+                        <p>Aproveite as ofertas por tempo limitado</p>
+                        <a href="categories/hardware.html" class="btn-outline">Ver Ofertas</a>
+                    </div>
+                </div>
+                <div class="promo-banner">
+                    <img src="images/avatar-default.png" alt="Lançamentos de Notebooks">
+                    <div class="banner-content">
+                        <h3>Novos Notebooks</h3>
+                        <p>Conheça os lançamentos de 2025</p>
+                        <a href="categories/notebooks.html" class="btn-outline">Ver Produtos</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Produtos Mais Vendidos -->
+    <section class="best-sellers">
+        <div class="container">
+            <h2 class="section-title">Mais Vendidos</h2>
+            <div class="products-grid" id="bestSellers">
+                <!-- Os produtos serão carregados dinamicamente -->
+                <div class="product-card">
+                    <div class="product-badge hot">Hot</div>
+                    <div class="product-image">
+                        <a href="product.html">
+                            <img src="images/avatar-default.png" alt="SSD Kingston">
+                        </a>
+                    </div>
+                    <div class="product-details">
+                        <div class="product-category">Hardware</div>
+                        <h3 class="product-title">
+                            <a href="product.html">SSD Kingston A400 480GB</a>
+                        </h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(5.0)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">R$299,90</span>
+                            <span class="old-price">R$349,90</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Adicionar</button>
+                            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge hot">Hot</div>
+                    <div class="product-image">
+                        <a href="product.html">
+                            <img src="images/avatar-default.png" alt="Cooler DeepCool">
+                        </a>
+                    </div>
+                    <div class="product-details">
+                        <div class="product-category">Hardware</div>
+                        <h3 class="product-title">
+                            <a href="product.html">Cooler DeepCool Gammaxx 400</a>
+                        </h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="far fa-star"></i>
+                            <span>(4.0)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">R$199,90</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Adicionar</button>
+                            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-badge sale">-10%</div>
+                    <div class="product-image">
+                        <a href="product.html">
+                            <img src="images/avatar-default.png" alt="Fonte Corsair">
+                        </a>
+                    </div>
+                    <div class="product-details">
+                        <div class="product-category">Hardware</div>
+                        <h3 class="product-title">
+                            <a href="product.html">Fonte Corsair CV650 650W 80 Plus Bronze</a>
+                        </h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                            <span>(4.5)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">R$449,90</span>
+                            <span class="old-price">R$499,90</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Adicionar</button>
+                            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image">
+                        <a href="product.html">
+                            <img src="images/avatar-default.png" alt="Gabinete Corsair">
+                        </a>
+                    </div>
+                    <div class="product-details">
+                        <div class="product-category">Hardware</div>
+                        <h3 class="product-title">
+                            <a href="product.html">Gabinete Corsair 4000D Airflow</a>
+                        </h3>
+                        <div class="product-rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <span>(5.0)</span>
+                        </div>
+                        <div class="product-price">
+                            <span class="current-price">R$599,90</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn-add-cart"><i class="fas fa-shopping-cart"></i> Adicionar</button>
+                            <button class="btn-favorite"><i class="far fa-heart"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="view-more">
+                <a href="categories/hardware.html" class="btn-secondary">Ver Mais Produtos</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marcas -->
+    <section class="brands">
+        <div class="container">
+            <h2 class="section-title">Nossas Marcas</h2>
+            <div class="brands-slider">
+                <div class="brand-item">
+                    <img src="images/avatar-default.png" alt="Intel">
+                </div>
+                <div class="brand-item">
+                    <img src="images/avatar-default.png" alt="AMD">
+                </div>
+                <div class="brand-item">
+                    <img src="images/avatar-default.png" alt="NVIDIA">
+                </div>
+                <div class="brand-item">
+                    <img src="images/avatar-default.png" alt="Asus">
+                </div>
+                <div class="brand-item">
+                    <img src="images/avatar-default.png" alt="MSI">
+                </div>
+                <div class="brand-item">
+                    <img src="images/avatar-default.png" alt="Corsair">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Inscreva-se em nossa Newsletter</h2>
+                <p>Receba ofertas exclusivas e novidades em primeira mão</p>
+                <form action="#" method="post" class="newsletter-form">
+                    <input type="email" placeholder="Seu e-mail" required>
+                    <button type="submit" class="btn-primary">Inscrever-se</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
     <!-- Footer -->
     <footer>
@@ -151,177 +496,98 @@
     </script>
 
     <script type="module">
-        import { getAllProducts } from './js/products.js';
+        import { getAllProducts, getProductsByCategory } from './js/products.js';
         
         // Função para formatar valores monetários
         function formatCurrency(value) {
             return `R$${parseFloat(value).toFixed(2).replace('.', ',')}`;
         }
         
-        // Função para criar um card de produto
-        function createProductCard(product) {
-            const card = document.createElement('div');
-            card.className = 'product-card';
-            
-            const hasDiscount = product.original_price && product.original_price > product.price;
-            
-            card.innerHTML = `
-                <div class="product-image">
-                    <img src="${product.image_url || 'images/avatar-default.png'}" alt="${product.name}" onerror="this.src='images/avatar-default.png'">
-                </div>
-                <div class="product-info">
-                    <h3 class="product-title">${product.name}</h3>
-                    <div class="product-price">
-                        ${hasDiscount ? `<span class="original-price">${formatCurrency(product.original_price)}</span>` : ''}
-                        <span class="current-price">${formatCurrency(product.price)}</span>
-                    </div>
-                    <div class="product-actions">
-                        <div class="quantity">
-                            <button class="decrease-qty">-</button>
-                            <input type="text" value="1" class="qty-input">
-                            <button class="increase-qty">+</button>
-                        </div>
-                        <button class="buy-button" data-product-id="${product.id}">Comprar</button>
-                    </div>
-                </div>
-            `;
-            
-            // Configurar eventos dos botões de quantidade
-            const decreaseBtn = card.querySelector('.decrease-qty');
-            const increaseBtn = card.querySelector('.increase-qty');
-            const qtyInput = card.querySelector('.qty-input');
-            
-            decreaseBtn.addEventListener('click', function() {
-                let qty = parseInt(qtyInput.value);
-                if (qty > 1) {
-                    qtyInput.value = qty - 1;
-                }
-            });
-            
-            increaseBtn.addEventListener('click', function() {
-                let qty = parseInt(qtyInput.value);
-                qtyInput.value = qty + 1;
-            });
-            
-            // Configurar evento do botão de compra
-            const buyButton = card.querySelector('.buy-button');
-            buyButton.addEventListener('click', function() {
-                const productId = this.dataset.productId;
-                const quantity = parseInt(qtyInput.value);
-                
-                // Adicionar ao carrinho (simulação)
-                addToCart(productId, quantity);
-                
-                alert(`Produto "${product.name}" adicionado ao carrinho!`);
-            });
-            
-            return card;
-        }
-        
-        // Função para adicionar ao carrinho (simulação)
-        function addToCart(productId, quantity) {
-            // Atualiza o contador do carrinho
-            const cartCount = document.getElementById('cartCount');
-            cartCount.textContent = parseInt(cartCount.textContent) + quantity;
-            
-            // Em um sistema real, isso seria implementado com o Supabase
-            console.log(`Produto ${productId} adicionado ao carrinho, quantidade: ${quantity}`);
-        }
-        
-        // Função para carregar produtos
-        async function loadProducts() {
+        // Função para carregar produtos em destaque
+        async function loadFeaturedProducts() {
             try {
-                // Busca todos os produtos
                 const result = await getAllProducts();
                 
-                if (result.success) {
-                    // Filtra produtos em promoção (com desconto)
-                    const promotions = result.products.filter(product => 
-                        product.original_price && product.original_price > product.price
-                    ).slice(0, 4); // Limita a 4 produtos
-                    
-                    // Filtra produtos em destaque
-                    const featured = result.products.filter(product => 
-                        product.featured
-                    ).slice(0, 4); // Limita a 4 produtos
-                    
-                    // Se não houver produtos em destaque suficientes, completa com outros produtos
-                    if (featured.length < 4) {
-                        const remaining = result.products
-                            .filter(product => !product.featured && (!promotions.some(p => p.id === product.id)))
-                            .slice(0, 4 - featured.length);
-                        
-                        featured.push(...remaining);
-                    }
-                    
-                    // Exibe produtos em promoção
-                    displayProducts('promotions-grid', 'promotionsLoading', promotions);
-                    
-                    // Exibe produtos em destaque
-                    displayProducts('featured-grid', 'featuredLoading', featured);
-                } else {
-                    throw new Error(result.error);
+                if (result.success && result.products.length > 0) {
+                    // Usar os produtos reais se disponíveis
+                    // Neste exemplo, estamos mantendo os produtos estáticos
+                    console.log('Produtos carregados:', result.products);
                 }
             } catch (error) {
-                console.error('Erro ao carregar produtos:', error);
-                
-                // Exibe produtos de exemplo para demonstração
-                displayExampleProducts();
+                console.error('Erro ao carregar produtos em destaque:', error);
             }
         }
         
-        // Função para exibir produtos
-        function displayProducts(containerId, loadingId, products) {
-            const container = document.getElementById(containerId);
-            const loading = document.getElementById(loadingId);
-            
-            // Oculta o indicador de carregamento
-            loading.style.display = 'none';
-            
-            if (products.length === 0) {
-                container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Nenhum produto encontrado.</p>';
-                return;
+        // Função para carregar produtos mais vendidos
+        async function loadBestSellers() {
+            try {
+                const result = await getAllProducts();
+                
+                if (result.success && result.products.length > 0) {
+                    // Usar os produtos reais se disponíveis
+                    // Neste exemplo, estamos mantendo os produtos estáticos
+                    console.log('Produtos mais vendidos carregados:', result.products);
+                }
+            } catch (error) {
+                console.error('Erro ao carregar produtos mais vendidos:', error);
             }
+        }
+        
+        // Função para adicionar ao carrinho
+        function setupAddToCart() {
+            const addToCartButtons = document.querySelectorAll('.btn-add-cart');
             
-            // Limpa o container
-            container.innerHTML = '';
-            
-            // Adiciona os produtos
-            products.forEach(product => {
-                const card = createProductCard(product);
-                container.appendChild(card);
+            addToCartButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Obter informações do produto
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('.product-title a').textContent;
+                    const productPrice = productCard.querySelector('.current-price').textContent;
+                    
+                    // Simular adição ao carrinho
+                    alert(`Produto adicionado ao carrinho: ${productName} - ${productPrice}`);
+                    
+                    // Atualizar contador do carrinho
+                    const cartCount = document.getElementById('cartCount');
+                    cartCount.textContent = parseInt(cartCount.textContent) + 1;
+                });
             });
         }
         
-        // Função para exibir produtos de exemplo
-        function displayExampleProducts() {
-            // Produtos de exemplo para promoções
-            const promotions = [
-                { id: 1, name: 'Headset Gamer RGB P3 USB Para PC PS4 Notebook', price: 59.90, original_price: 89.90 },
-                { id: 2, name: 'HD Externo 1TB USB 3.1 Portátil', price: 299.90, original_price: 350.00 },
-                { id: 3, name: 'Cabo Carregador 3 em 1 Type-C Lightning USB', price: 29.90, original_price: 45.00 },
-                { id: 4, name: 'Mouse Gamer RGB 7200DPI 7 Botões', price: 89.90, original_price: 120.00 }
-            ];
+        // Função para adicionar aos favoritos
+        function setupAddToFavorites() {
+            const favoriteButtons = document.querySelectorAll('.btn-favorite');
             
-            // Produtos de exemplo para destaques
-            const featured = [
-                { id: 5, name: 'Notebook Gamer Intel Core i7, 16GB RAM, SSD 512GB', price: 5499.90, featured: true },
-                { id: 6, name: 'Placa de Vídeo NVIDIA GeForce RTX 3060 12GB', price: 2799.90, featured: true },
-                { id: 7, name: 'Monitor Gamer 27" 144Hz IPS Full HD', price: 1899.90, featured: true },
-                { id: 8, name: 'Teclado Mecânico Gamer RGB Switch Blue', price: 349.90, featured: true }
-            ];
-            
-            // Exibe produtos em promoção
-            displayProducts('promotions-grid', 'promotionsLoading', promotions);
-            
-            // Exibe produtos em destaque
-            displayProducts('featured-grid', 'featuredLoading', featured);
+            favoriteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    // Alternar ícone de coração
+                    const icon = this.querySelector('i');
+                    if (icon.classList.contains('far')) {
+                        icon.classList.remove('far');
+                        icon.classList.add('fas');
+                        icon.style.color = '#dc3545';
+                    } else {
+                        icon.classList.remove('fas');
+                        icon.classList.add('far');
+                        icon.style.color = '';
+                    }
+                    
+                    // Obter informações do produto
+                    const productCard = this.closest('.product-card');
+                    const productName = productCard.querySelector('.product-title a').textContent;
+                    
+                    // Simular adição aos favoritos
+                    alert(`Produto ${icon.classList.contains('fas') ? 'adicionado aos' : 'removido dos'} favoritos: ${productName}`);
+                });
+            });
         }
         
         // Inicialização
         document.addEventListener('DOMContentLoaded', function() {
-            // Carrega os produtos
-            loadProducts();
+            loadFeaturedProducts();
+            loadBestSellers();
+            setupAddToCart();
+            setupAddToFavorites();
         });
     </script>
 </body>

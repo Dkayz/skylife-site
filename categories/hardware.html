@@ -13,7 +13,8 @@
         <div class="container">
             <div class="header-top">
                 <div class="contact-info">
-                    <a href="tel:+551199999999"><i class="fas fa-phone"></i> (11) 9999-9999</a>
+                    <a href="tel:+5521966393204"><i class="fas fa-phone"></i> (21) 96639-3204</a>
+                    <a href="https://wa.me/5521960004279" target="_blank"><i class="fab fa-whatsapp"></i> (21) 96000-4279</a>
                     <a href="mailto:contato@skylifetecnologias.com.br"><i class="fas fa-envelope"></i> contato@skylifetecnologias.com.br</a>
                 </div>
                 <div class="user-actions">
@@ -159,6 +160,11 @@
     <script type="module">
         import { getProductsByCategory, getAllCategories } from '../js/products.js';
         
+        // Variáveis globais para armazenar os produtos e filtros atuais
+        let allProducts = [];
+        let currentSortOrder = 'name-asc';
+        let currentSubcategory = '';
+        
         // Função para formatar valores monetários
         function formatCurrency(value) {
             return `R$${parseFloat(value).toFixed(2).replace('.', ',')}`;
@@ -241,7 +247,11 @@
                 const result = await getProductsByCategory(1);
                 
                 if (result.success) {
-                    displayProducts(result.products);
+                    // Armazena os produtos para uso posterior
+                    allProducts = result.products;
+                    
+                    // Aplica ordenação e filtros
+                    applyFiltersAndSort();
                 } else {
                     throw new Error(result.error);
                 }
@@ -249,8 +259,57 @@
                 console.error('Erro ao carregar produtos:', error);
                 
                 // Exibe produtos de exemplo para demonstração
-                displayExampleProducts();
+                loadExampleProducts();
             }
+        }
+        
+        // Função para carregar produtos de exemplo
+        function loadExampleProducts() {
+            // Produtos de exemplo para hardware
+            allProducts = [
+                { id: 1, name: 'Processador Intel Core i5-12400F', price: 1099.90, image_url: '../images/avatar-default.png', subcategory: 'processadores' },
+                { id: 2, name: 'Placa-mãe Asus Prime B660M-A', price: 899.90, image_url: '../images/avatar-default.png', subcategory: 'placas-mae' },
+                { id: 3, name: 'Memória RAM Corsair Vengeance 16GB DDR4 3200MHz', price: 349.90, image_url: '../images/avatar-default.png', subcategory: 'memorias' },
+                { id: 4, name: 'Placa de Vídeo NVIDIA GeForce RTX 3060 12GB', price: 2799.90, image_url: '../images/avatar-default.png', subcategory: 'placas-video' },
+                { id: 5, name: 'SSD Kingston NV2 1TB M.2 NVMe', price: 499.90, image_url: '../images/avatar-default.png', subcategory: 'armazenamento' },
+                { id: 6, name: 'Fonte Corsair CV650 650W 80 Plus Bronze', price: 399.90, image_url: '../images/avatar-default.png', subcategory: 'fontes' },
+                { id: 7, name: 'Gabinete Corsair 4000D Airflow', price: 599.90, image_url: '../images/avatar-default.png', subcategory: 'gabinetes' },
+                { id: 8, name: 'Cooler para Processador DeepCool AK620', price: 299.90, image_url: '../images/avatar-default.png', subcategory: 'processadores' }
+            ];
+            
+            // Aplica ordenação e filtros
+            applyFiltersAndSort();
+        }
+        
+        // Função para aplicar filtros e ordenação
+        function applyFiltersAndSort() {
+            // Filtra os produtos pela subcategoria selecionada
+            let filteredProducts = allProducts;
+            
+            if (currentSubcategory) {
+                filteredProducts = allProducts.filter(product => 
+                    product.subcategory === currentSubcategory
+                );
+            }
+            
+            // Ordena os produtos conforme a opção selecionada
+            filteredProducts.sort((a, b) => {
+                switch (currentSortOrder) {
+                    case 'name-asc':
+                        return a.name.localeCompare(b.name);
+                    case 'name-desc':
+                        return b.name.localeCompare(a.name);
+                    case 'price-asc':
+                        return a.price - b.price;
+                    case 'price-desc':
+                        return b.price - a.price;
+                    default:
+                        return 0;
+                }
+            });
+            
+            // Exibe os produtos filtrados e ordenados
+            displayProducts(filteredProducts);
         }
         
         // Função para exibir produtos
@@ -276,24 +335,6 @@
             });
         }
         
-        // Função para exibir produtos de exemplo
-        function displayExampleProducts() {
-            // Produtos de exemplo para hardware
-            const products = [
-                { id: 1, name: 'Processador Intel Core i5-12400F', price: 1099.90, image_url: '../images/avatar-default.png' },
-                { id: 2, name: 'Placa-mãe Asus Prime B660M-A', price: 899.90, image_url: '../images/avatar-default.png' },
-                { id: 3, name: 'Memória RAM Corsair Vengeance 16GB DDR4 3200MHz', price: 349.90, image_url: '../images/avatar-default.png' },
-                { id: 4, name: 'Placa de Vídeo NVIDIA GeForce RTX 3060 12GB', price: 2799.90, image_url: '../images/avatar-default.png' },
-                { id: 5, name: 'SSD Kingston NV2 1TB M.2 NVMe', price: 499.90, image_url: '../images/avatar-default.png' },
-                { id: 6, name: 'Fonte Corsair CV650 650W 80 Plus Bronze', price: 399.90, image_url: '../images/avatar-default.png' },
-                { id: 7, name: 'Gabinete Corsair 4000D Airflow', price: 599.90, image_url: '../images/avatar-default.png' },
-                { id: 8, name: 'Cooler para Processador DeepCool AK620', price: 299.90, image_url: '../images/avatar-default.png' }
-            ];
-            
-            // Exibe produtos
-            displayProducts(products);
-        }
-        
         // Inicialização
         document.addEventListener('DOMContentLoaded', function() {
             // Carrega os produtos
@@ -301,13 +342,13 @@
             
             // Configura eventos de filtro
             document.getElementById('sortOrder').addEventListener('change', function() {
-                // Implementar ordenação
-                loadProducts();
+                currentSortOrder = this.value;
+                applyFiltersAndSort();
             });
             
             document.getElementById('subcategory').addEventListener('change', function() {
-                // Implementar filtragem por subcategoria
-                loadProducts();
+                currentSubcategory = this.value;
+                applyFiltersAndSort();
             });
         });
     </script>

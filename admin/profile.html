@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Skylife Tecnologias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .profile-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .profile-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .profile-avatar {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #f0f0f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 40px;
+            color: #0066cc;
+        }
+        
+        .profile-info h1 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        
+        .profile-info p {
+            margin: 0;
+            color: #666;
+        }
+        
+        .profile-tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 30px;
+        }
+        
+        .profile-tab {
+            padding: 15px 20px;
+            cursor: pointer;
+            font-weight: 600;
+            color: #666;
+            border-bottom: 3px solid transparent;
+        }
+        
+        .profile-tab.active {
+            color: #0066cc;
+            border-bottom-color: #0066cc;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group input:focus {
+            border-color: #0066cc;
+            outline: none;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .form-row .form-group {
+            flex: 1;
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #0066cc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0052a3;
+        }
+        
+        .order-card {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .order-items {
+            margin-bottom: 15px;
+        }
+        
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+        
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 600;
+            padding-top: 10px;
+            border-top: 1px solid #eee;
+        }
+        
+        .address-card {
+            border: 1px solid #eee;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        
+        .address-card h3 {
+            margin-top: 0;
+        }
+        
+        .address-actions {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        
+        .address-actions button {
+            background: none;
+            border: none;
+            color: #0066cc;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        
+        .address-actions button:hover {
+            text-decoration: underline;
+        }
+        
+        .add-address {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #ddd;
+            border-radius: 5px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .add-address:hover {
+            border-color: #0066cc;
+            color: #0066cc;
+        }
+        
+        .add-address i {
+            margin-right: 10px;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="contact-info">
+                    <a href="tel:+5521966393204"><i class="fas fa-phone"></i> (21) 96639-3204</a>
+                    <a href="https://wa.me/5521960004279" target="_blank"><i class="fab fa-whatsapp"></i> (21) 96000-4279</a>
+                    <a href="mailto:contato@skylifetecnologias.com.br"><i class="fas fa-envelope"></i> contato@skylifetecnologias.com.br</a>
+                </div>
+                <div class="user-actions">
+                    <!-- Links de usuário serão atualizados dinamicamente pelo auth-manager.js -->
+                    <a href="login.html"><i class="fas fa-user"></i> Minha Conta</a>
+                    <a href="login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="register.html"><i class="fas fa-user-plus"></i> Cadastre-se</a>
+                </div>
+            </div>
+            <div class="header-main">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Skylife Tecnologias">
+                    </a>
+                </div>
+                <div class="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" placeholder="Digite o que está buscando...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="cart">
+                    <a href="../cart.html">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Carrinho | <span id="cartCount">0</span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <div class="nav-menu">
+                    <ul>
+                        <li><a href="../index.html">Início</a></li>
+                        <li><a href="../categories/hardware.html">Hardware</a></li>
+                        <li><a href="../categories/perifericos.html">Periféricos</a></li>
+                        <li><a href="../categories/notebooks.html">Notebooks</a></li>
+                        <li><a href="../categories/smartphones.html">Smartphones</a></li>
+                        <li><a href="../pc-builder.html">Monte seu PC</a></li>
+                        <li><a href="../support.html">Suporte</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <div class="profile-container">
+            <div class="profile-header">
+                <div class="profile-avatar">
+                    <i class="fas fa-user"></i>
+                </div>
+                <div class="profile-info">
+                    <h1 id="user-name">Carregando...</h1>
+                    <p id="user-email">Carregando...</p>
+                </div>
+            </div>
+            
+            <div class="profile-tabs">
+                <div class="profile-tab active" data-tab="personal-info">Dados Pessoais</div>
+                <div class="profile-tab" data-tab="orders">Meus Pedidos</div>
+                <div class="profile-tab" data-tab="addresses">Endereços</div>
+                <div class="profile-tab" data-tab="security">Segurança</div>
+            </div>
+            
+            <!-- Aba de Dados Pessoais -->
+            <div class="tab-content active" id="personal-info">
+                <form id="personal-info-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Nome Completo</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="cpf">CPF</label>
+                            <input type="text" id="cpf" name="cpf" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefone</label>
+                            <input type="tel" id="phone" name="phone" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="birthdate">Data de Nascimento</label>
+                            <input type="date" id="birthdate" name="birthdate">
+                        </div>
+                        <div class="form-group">
+                            <label for="gender">Gênero</label>
+                            <select id="gender" name="gender">
+                                <option value="">Selecione</option>
+                                <option value="male">Masculino</option>
+                                <option value="female">Feminino</option>
+                                <option value="other">Outro</option>
+                                <option value="prefer_not_to_say">Prefiro não informar</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Salvar Alterações</button>
+                </form>
+            </div>
+            
+            <!-- Aba de Pedidos -->
+            <div class="tab-content" id="orders">
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <strong>Pedido #12345</strong>
+                            <div>Data: 15/05/2025</div>
+                        </div>
+                        <div>
+                            <span class="order-status">Entregue</span>
+                        </div>
+                    </div>
+                    <div class="order-items">
+                        <div class="order-item">
+                            <div>1x Processador Intel Core i5-12400F</div>
+                            <div>R$1.099,90</div>
+                        </div>
+                        <div class="order-item">
+                            <div>1x Placa-mãe Asus Prime B660M-A</div>
+                            <div>R$899,90</div>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <div>Total</div>
+                        <div>R$1.999,80</div>
+                    </div>
+                </div>
+                
+                <div class="order-card">
+                    <div class="order-header">
+                        <div>
+                            <strong>Pedido #12346</strong>
+                            <div>Data: 10/05/2025</div>
+                        </div>
+                        <div>
+                            <span class="order-status">Em trânsito</span>
+                        </div>
+                    </div>
+                    <div class="order-items">
+                        <div class="order-item">
+                            <div>1x Memória RAM Corsair Vengeance 16GB DDR4 3200MHz</div>
+                            <div>R$349,90</div>
+                        </div>
+                    </div>
+                    <div class="order-footer">
+                        <div>Total</div>
+                        <div>R$349,90</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Aba de Endereços -->
+            <div class="tab-content" id="addresses">
+                <div class="address-card">
+                    <div class="address-actions">
+                        <button><i class="fas fa-edit"></i> Editar</button>
+                        <button><i class="fas fa-trash"></i> Excluir</button>
+                    </div>
+                    <h3>Casa</h3>
+                    <p>Rua Exemplo, 123</p>
+                    <p>Bairro Exemplo</p>
+                    <p>Rio de Janeiro - RJ</p>
+                    <p>CEP: 20000-000</p>
+                </div>
+                
+                <div class="address-card">
+                    <div class="address-actions">
+                        <button><i class="fas fa-edit"></i> Editar</button>
+                        <button><i class="fas fa-trash"></i> Excluir</button>
+                    </div>
+                    <h3>Trabalho</h3>
+                    <p>Av. Exemplo, 456</p>
+                    <p>Centro</p>
+                    <p>Rio de Janeiro - RJ</p>
+                    <p>CEP: 20010-000</p>
+                </div>
+                
+                <div class="add-address">
+                    <i class="fas fa-plus"></i> Adicionar Novo Endereço
+                </div>
+            </div>
+            
+            <!-- Aba de Segurança -->
+            <div class="tab-content" id="security">
+                <form id="security-form">
+                    <div class="form-group">
+                        <label for="current-password">Senha Atual</label>
+                        <input type="password" id="current-password" name="current-password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="new-password">Nova Senha</label>
+                        <input type="password" id="new-password" name="new-password" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmar Nova Senha</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary">Alterar Senha</button>
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Institucional</h3>
+                    <ul>
+                        <li><a href="../about.html">Quem Somos</a></li>
+                        <li><a href="../terms.html">Termos e Condições</a></li>
+                        <li><a href="../privacy.html">Política de Privacidade</a></li>
+                        <li><a href="../blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Atendimento</h3>
+                    <ul>
+                        <li><a href="../support.html">Central de Suporte</a></li>
+                        <li><a href="../faq.html">Perguntas Frequentes</a></li>
+                        <li><a href="../contact.html">Fale Conosco</a></li>
+                        <li><a href="../returns.html">Trocas e Devoluções</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Minha Conta</h3>
+                    <ul>
+                        <li><a href="login.html">Meus Pedidos</a></li>
+                        <li><a href="login.html">Meus Dados</a></li>
+                        <li><a href="login.html">Meus Favoritos</a></li>
+                        <li><a href="login.html">Rastrear Pedido</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Formas de Pagamento</h3>
+                    <p>Cartões de Crédito, Boleto, Pix</p>
+                    <h3>Redes Sociais</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Skylife Tecnologias - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Importa o gerenciador de autenticação -->
+    <script type="module">
+        import { authManager } from '../js/auth-manager.js';
+        import { getCurrentUser } from '../js/auth.js';
+        
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Verifica se o usuário está autenticado
+            const result = await getCurrentUser();
+            
+            if (!result.success) {
+                // Redireciona para a página de login se não estiver autenticado
+                window.location.href = 'login.html';
+                return;
+            }
+            
+            // Preenche os dados do usuário
+            const user = result.user;
+            const staff = result.staff;
+            
+            document.getElementById('user-name').textContent = staff?.name || user.email;
+            document.getElementById('user-email').textContent = user.email;
+            
+            // Preenche o formulário com os dados do usuário
+            document.getElementById('name').value = staff?.name || '';
+            document.getElementById('email').value = user.email;
+            document.getElementById('cpf').value = staff?.cpf || '';
+            document.getElementById('phone').value = staff?.phone || '';
+            
+            // Configura as abas
+            const tabs = document.querySelectorAll('.profile-tab');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    // Remove a classe active de todas as abas
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tabContents.forEach(c => c.classList.remove('active'));
+                    
+                    // Adiciona a classe active na aba clicada
+                    this.classList.add('active');
+                    
+                    // Mostra o conteúdo correspondente
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Configura o formulário de dados pessoais
+            document.getElementById('personal-info-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                // Aqui você implementaria a lógica para salvar os dados
+                alert('Dados salvos com sucesso!');
+            });
+            
+            // Configura o formulário de segurança
+            document.getElementById('security-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const currentPassword = document.getElementById('current-password').value;
+                const newPassword = document.getElementById('new-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                if (newPassword !== confirmPassword) {
+                    alert('As senhas não coincidem!');
+                    return;
+                }
+                
+                // Aqui você implementaria a lógica para alterar a senha
+                alert('Senha alterada com sucesso!');
+            });
+            
+            // Configura a máscara de CPF
+            const cpfInput = document.getElementById('cpf');
+            cpfInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 11) {
+                    value = value.slice(0, 11);
+                }
+                
+                if (value.length > 9) {
+                    value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
+                } else if (value.length > 6) {
+                    value = value.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
+                } else if (value.length > 3) {
+                    value = value.replace(/(\d{3})(\d{1,3})/, '$1.$2');
+                }
+                
+                e.target.value = value;
+            });
+            
+            // Configura a máscara de telefone
+            const phoneInput = document.getElementById('phone');
+            phoneInput.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                
+                if (value.length > 11) {
+                    value = value.slice(0, 11);
+                }
+                
+                if (value.length > 10) {
+                    value = value.replace(/(\d{2})(\d{5})(\d{4})/, '($1) $2-$3');
+                } else if (value.length > 6) {
+                    value = value.replace(/(\d{2})(\d{4})(\d{1,4})/, '($1) $2-$3');
+                } else if (value.length > 2) {
+                    value = value.replace(/(\d{2})(\d{1,5})/, '($1) $2');
+                }
+                
+                e.target.value = value;
+            });
+        });
+    </script>
+</body>
+</html>
