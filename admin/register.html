@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro - Skylife Tecnologias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <img src="../images/logo.png" alt="Skylife Tecnologias">
+                <h2>Crie sua conta</h2>
+                <p>Preencha os dados abaixo para se cadastrar</p>
+            </div>
+            <form class="auth-form" id="registerForm">
+                <div class="form-group">
+                    <label for="name">Nome completo</label>
+                    <input type="text" id="name" class="form-control" placeholder="Seu nome completo" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" class="form-control" placeholder="Seu e-mail" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" class="form-control" placeholder="Crie uma senha" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirme a senha</label>
+                    <input type="password" id="confirm-password" class="form-control" placeholder="Confirme sua senha" required>
+                </div>
+                <div id="registerError" class="error-message" style="display: none; color: red; margin-bottom: 15px;"></div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
+            </form>
+            <div class="auth-footer">
+                <p>Já tem uma conta? <a href="login.html">Faça login</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { signUp } from '../js/auth.js';
+        
+        document.addEventListener('DOMContentLoaded', function( ) {
+            const registerForm = document.getElementById('registerForm');
+            const registerError = document.getElementById('registerError');
+            
+            registerForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
+                
+                // Validação de senha
+                if (password !== confirmPassword) {
+                    registerError.textContent = 'As senhas não coincidem.';
+                    registerError.style.display = 'block';
+                    return;
+                }
+                
+                // Mostrar indicador de carregamento
+                const submitButton = registerForm.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Cadastrando...';
+                
+                try {
+                    const result = await signUp(email, password, name);
+                    
+                    if (result.success) {
+                        // Cadastro bem-sucedido, redireciona para o login
+                        alert('Cadastro realizado com sucesso! Faça login para continuar.');
+                        window.location.href = 'login.html';
+                    } else {
+                        // Exibe mensagem de erro
+                        registerError.textContent = result.error || 'Erro ao fazer cadastro. Tente novamente.';
+                        registerError.style.display = 'block';
+                        
+                        // Restaura o botão
+                        submitButton.disabled = false;
+                        submitButton.textContent = originalText;
+                    }
+                } catch (error) {
+                    console.error('Erro ao fazer cadastro:', error);
+                    registerError.textContent = 'Ocorreu um erro ao tentar fazer cadastro. Tente novamente.';
+                    registerError.style.display = 'block';
+                    
+                    // Restaura o botão
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText;
+                }
+            });
+        });
+    </script>
+</body>
+</html>

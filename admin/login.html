@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Skylife Tecnologias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <img src="../images/logo.png" alt="Skylife Tecnologias">
+                <h2>Bem-vindo de volta</h2>
+                <p>Faça login para acessar sua conta</p>
+            </div>
+            <form class="auth-form" id="loginForm">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" class="form-control" placeholder="Seu e-mail" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" class="form-control" placeholder="Sua senha" required>
+                </div>
+                <div id="loginError" class="error-message" style="display: none; color: red; margin-bottom: 15px;"></div>
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Entrar</button>
+                </div>
+            </form>
+            <div class="auth-footer">
+                <p>Não tem uma conta? <a href="register.html">Cadastre-se</a></p>
+                <p><a href="forgot-password.html">Esqueceu sua senha?</a></p>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { signIn } from '../js/auth.js';
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginForm = document.getElementById('loginForm');
+            const loginError = document.getElementById('loginError');
+            
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                // Mostrar indicador de carregamento
+                const submitButton = loginForm.querySelector('button[type="submit"]');
+                const originalText = submitButton.textContent;
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Entrando...';
+                
+                try {
+                    const result = await signIn(email, password);
+                    
+                    if (result.success) {
+                        // Login bem-sucedido, redireciona para o dashboard
+                        window.location.href = 'dashboard.html';
+                    } else {
+                        // Exibe mensagem de erro
+                        loginError.textContent = result.error || 'Erro ao fazer login. Verifique suas credenciais.';
+                        loginError.style.display = 'block';
+                        
+                        // Restaura o botão
+                        submitButton.disabled = false;
+                        submitButton.textContent = originalText;
+                    }
+                } catch (error) {
+                    console.error('Erro ao fazer login:', error);
+                    loginError.textContent = 'Ocorreu um erro ao tentar fazer login. Tente novamente.';
+                    loginError.style.display = 'block';
+                    
+                    // Restaura o botão
+                    submitButton.disabled = false;
+                    submitButton.textContent = originalText;
+                }
+            });
+        });
+    </script>
+</body>
+</html>
