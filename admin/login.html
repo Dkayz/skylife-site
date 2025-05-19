@@ -6,42 +6,240 @@
     <title>Login - Skylife Tecnologias</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .login-container {
+            max-width: 500px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-container h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-group input:focus {
+            border-color: #0066cc;
+            outline: none;
+        }
+        
+        .form-actions {
+            margin-top: 30px;
+        }
+        
+        .btn-primary {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background-color: #0066cc;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .btn-primary:hover {
+            background-color: #0052a3;
+        }
+        
+        .form-footer {
+            margin-top: 20px;
+            text-align: center;
+        }
+        
+        .form-footer a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+        
+        .form-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .alert {
+            padding: 15px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            color: #721c24;
+            background-color: #f8d7da;
+            border: 1px solid #f5c6cb;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <img src="../images/logo.png" alt="Skylife Tecnologias">
-                <h2>Bem-vindo de volta</h2>
-                <p>Faça login para acessar sua conta</p>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="contact-info">
+                    <a href="tel:+551199999999"><i class="fas fa-phone"></i> (11) 9999-9999</a>
+                    <a href="mailto:contato@skylifetecnologias.com.br"><i class="fas fa-envelope"></i> contato@skylifetecnologias.com.br</a>
+                </div>
+                <div class="user-actions">
+                    <!-- Links de usuário serão atualizados dinamicamente pelo auth-manager.js -->
+                    <a href="login.html"><i class="fas fa-user"></i> Minha Conta</a>
+                    <a href="login.html" class="active"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="register.html"><i class="fas fa-user-plus"></i> Cadastre-se</a>
+                </div>
             </div>
-            <form class="auth-form" id="loginForm">
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" class="form-control" placeholder="Seu e-mail" required>
+            <div class="header-main">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Skylife Tecnologias">
+                    </a>
                 </div>
-                <div class="form-group">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" class="form-control" placeholder="Sua senha" required>
+                <div class="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" placeholder="Digite o que está buscando...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
                 </div>
-                <div id="loginError" class="error-message" style="display: none; color: red; margin-bottom: 15px;"></div>
-                <div class="form-actions">
-                    <button type="submit" class="btn btn-primary">Entrar</button>
+                <div class="cart">
+                    <a href="../cart.html">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Carrinho | <span id="cartCount">0</span></span>
+                    </a>
                 </div>
-            </form>
-            <div class="auth-footer">
-                <p>Não tem uma conta? <a href="register.html">Cadastre-se</a></p>
-                <p><a href="forgot-password.html">Esqueceu sua senha?</a></p>
             </div>
         </div>
-    </div>
+        <nav>
+            <div class="container">
+                <div class="nav-menu">
+                    <ul>
+                        <li><a href="../index.html">Início</a></li>
+                        <li><a href="../categories/hardware.html">Hardware</a></li>
+                        <li><a href="../categories/perifericos.html">Periféricos</a></li>
+                        <li><a href="../categories/notebooks.html">Notebooks</a></li>
+                        <li><a href="../categories/smartphones.html">Smartphones</a></li>
+                        <li><a href="../pc-builder.html">Monte seu PC</a></li>
+                        <li><a href="../support.html">Suporte</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <div class="login-container">
+            <h1>Login</h1>
+            
+            <div id="loginError" class="alert">
+                Email ou senha incorretos. Por favor, tente novamente.
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="submit" class="btn-primary">Entrar</button>
+                </div>
+                
+                <div class="form-footer">
+                    <p>Não tem uma conta? <a href="register.html">Cadastre-se</a></p>
+                    <p><a href="forgot-password.html">Esqueceu sua senha?</a></p>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Institucional</h3>
+                    <ul>
+                        <li><a href="../about.html">Quem Somos</a></li>
+                        <li><a href="../terms.html">Termos e Condições</a></li>
+                        <li><a href="../privacy.html">Política de Privacidade</a></li>
+                        <li><a href="../blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Atendimento</h3>
+                    <ul>
+                        <li><a href="../support.html">Central de Suporte</a></li>
+                        <li><a href="../faq.html">Perguntas Frequentes</a></li>
+                        <li><a href="../contact.html">Fale Conosco</a></li>
+                        <li><a href="../returns.html">Trocas e Devoluções</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Minha Conta</h3>
+                    <ul>
+                        <li><a href="login.html">Meus Pedidos</a></li>
+                        <li><a href="login.html">Meus Dados</a></li>
+                        <li><a href="login.html">Meus Favoritos</a></li>
+                        <li><a href="login.html">Rastrear Pedido</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Formas de Pagamento</h3>
+                    <p>Cartões de Crédito, Boleto, Pix</p>
+                    <h3>Redes Sociais</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Skylife Tecnologias - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Importa o gerenciador de autenticação -->
     <script type="module">
+        import { authManager } from '../js/auth-manager.js';
         import { signIn } from '../js/auth.js';
         
         document.addEventListener('DOMContentLoaded', function() {
             const loginForm = document.getElementById('loginForm');
             const loginError = document.getElementById('loginError');
+            
+            // Verifica se já está autenticado
+            if (authManager.isAuthenticated) {
+                window.location.href = 'dashboard.html';
+                return;
+            }
             
             loginForm.addEventListener('submit', async function(e) {
                 e.preventDefault();
@@ -49,35 +247,34 @@
                 const email = document.getElementById('email').value;
                 const password = document.getElementById('password').value;
                 
-                // Mostrar indicador de carregamento
+                // Desabilita o botão durante o login
                 const submitButton = loginForm.querySelector('button[type="submit"]');
-                const originalText = submitButton.textContent;
                 submitButton.disabled = true;
-                submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Entrando...';
+                submitButton.textContent = 'Entrando...';
+                
+                // Esconde mensagem de erro
+                loginError.style.display = 'none';
                 
                 try {
                     const result = await signIn(email, password);
                     
                     if (result.success) {
-                        // Login bem-sucedido, redireciona para o dashboard
+                        // Atualiza o estado de autenticação
+                        await authManager.init();
+                        
+                        // Redireciona para o dashboard
                         window.location.href = 'dashboard.html';
                     } else {
                         // Exibe mensagem de erro
-                        loginError.textContent = result.error || 'Erro ao fazer login. Verifique suas credenciais.';
                         loginError.style.display = 'block';
-                        
-                        // Restaura o botão
                         submitButton.disabled = false;
-                        submitButton.textContent = originalText;
+                        submitButton.textContent = 'Entrar';
                     }
                 } catch (error) {
                     console.error('Erro ao fazer login:', error);
-                    loginError.textContent = 'Ocorreu um erro ao tentar fazer login. Tente novamente.';
                     loginError.style.display = 'block';
-                    
-                    // Restaura o botão
                     submitButton.disabled = false;
-                    submitButton.textContent = originalText;
+                    submitButton.textContent = 'Entrar';
                 }
             });
         });

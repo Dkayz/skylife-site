@@ -17,6 +17,7 @@
                     <a href="mailto:contato@skylifetecnologias.com.br"><i class="fas fa-envelope"></i> contato@skylifetecnologias.com.br</a>
                 </div>
                 <div class="user-actions">
+                    <!-- Links de usuário serão atualizados dinamicamente pelo auth-manager.js -->
                     <a href="admin/login.html"><i class="fas fa-user"></i> Minha Conta</a>
                     <a href="admin/login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
                     <a href="admin/register.html"><i class="fas fa-user-plus"></i> Cadastre-se</a>
@@ -144,6 +145,11 @@
         </div>
     </footer>
 
+    <!-- Importa o gerenciador de autenticação -->
+    <script type="module">
+        import { authManager } from './js/auth-manager.js';
+    </script>
+
     <script type="module">
         import { getAllProducts } from './js/products.js';
         
@@ -161,7 +167,7 @@
             
             card.innerHTML = `
                 <div class="product-image">
-                    <img src="${product.image_url || 'https://via.placeholder.com/300x300'}" alt="${product.name}">
+                    <img src="${product.image_url || 'images/avatar-default.png'}" alt="${product.name}" onerror="this.src='images/avatar-default.png'">
                 </div>
                 <div class="product-info">
                     <h3 class="product-title">${product.name}</h3>

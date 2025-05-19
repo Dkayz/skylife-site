@@ -17,6 +17,7 @@
                     <a href="mailto:contato@skylifetecnologias.com.br"><i class="fas fa-envelope"></i> contato@skylifetecnologias.com.br</a>
                 </div>
                 <div class="user-actions">
+                    <!-- Links de usuário serão atualizados dinamicamente pelo auth-manager.js -->
                     <a href="../admin/login.html"><i class="fas fa-user"></i> Minha Conta</a>
                     <a href="../admin/login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
                     <a href="../admin/register.html"><i class="fas fa-user-plus"></i> Cadastre-se</a>
@@ -149,6 +150,11 @@
             </div>
         </div>
     </footer>
+
+    <!-- Importa o gerenciador de autenticação -->
+    <script type="module">
+        import { authManager } from '../js/auth-manager.js';
+    </script>
 
     <script type="module">
         import { getProductsByCategory, getAllCategories } from '../js/products.js';
