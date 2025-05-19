@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hardware - Skylife Tecnologias</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-top">
+                <div class="contact-info">
+                    <a href="tel:+551199999999"><i class="fas fa-phone"></i> (11) 9999-9999</a>
+                    <a href="mailto:contato@skylifetecnologias.com.br"><i class="fas fa-envelope"></i> contato@skylifetecnologias.com.br</a>
+                </div>
+                <div class="user-actions">
+                    <a href="../admin/login.html"><i class="fas fa-user"></i> Minha Conta</a>
+                    <a href="../admin/login.html"><i class="fas fa-sign-in-alt"></i> Login</a>
+                    <a href="../admin/register.html"><i class="fas fa-user-plus"></i> Cadastre-se</a>
+                </div>
+            </div>
+            <div class="header-main">
+                <div class="logo">
+                    <a href="../index.html">
+                        <img src="../images/logo.png" alt="Skylife Tecnologias">
+                    </a>
+                </div>
+                <div class="search-bar">
+                    <form action="#" method="get">
+                        <input type="text" placeholder="Digite o que está buscando...">
+                        <button type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                </div>
+                <div class="cart">
+                    <a href="../cart.html">
+                        <i class="fas fa-shopping-cart"></i>
+                        <span>Carrinho | <span id="cartCount">0</span></span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <nav>
+            <div class="container">
+                <div class="nav-menu">
+                    <ul>
+                        <li><a href="../index.html">Início</a></li>
+                        <li><a href="hardware.html" class="active">Hardware</a></li>
+                        <li><a href="perifericos.html">Periféricos</a></li>
+                        <li><a href="notebooks.html">Notebooks</a></li>
+                        <li><a href="smartphones.html">Smartphones</a></li>
+                        <li><a href="../pc-builder.html">Monte seu PC</a></li>
+                        <li><a href="../support.html">Suporte</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Conteúdo Principal -->
+    <main class="container">
+        <div class="page-header">
+            <h1>Hardware</h1>
+            <p>Confira nossa seleção de componentes para seu computador</p>
+        </div>
+
+        <!-- Filtros -->
+        <div class="filters">
+            <div class="filter-group">
+                <label>Ordenar por:</label>
+                <select id="sortOrder">
+                    <option value="name-asc">Nome (A-Z)</option>
+                    <option value="name-desc">Nome (Z-A)</option>
+                    <option value="price-asc">Menor Preço</option>
+                    <option value="price-desc">Maior Preço</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label>Subcategoria:</label>
+                <select id="subcategory">
+                    <option value="">Todas</option>
+                    <option value="processadores">Processadores</option>
+                    <option value="placas-mae">Placas-mãe</option>
+                    <option value="memorias">Memórias</option>
+                    <option value="placas-video">Placas de Vídeo</option>
+                    <option value="armazenamento">Armazenamento</option>
+                    <option value="fontes">Fontes</option>
+                    <option value="gabinetes">Gabinetes</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Produtos -->
+        <div class="products-grid" id="products-grid">
+            <div id="productsLoading" class="loading-indicator" style="text-align: center; padding: 30px; grid-column: 1 / -1;">
+                <i class="fas fa-spinner fa-spin"></i> Carregando produtos...
+            </div>
+            <!-- Produtos serão carregados dinamicamente -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Institucional</h3>
+                    <ul>
+                        <li><a href="../about.html">Quem Somos</a></li>
+                        <li><a href="../terms.html">Termos e Condições</a></li>
+                        <li><a href="../privacy.html">Política de Privacidade</a></li>
+                        <li><a href="../blog.html">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Atendimento</h3>
+                    <ul>
+                        <li><a href="../support.html">Central de Suporte</a></li>
+                        <li><a href="../faq.html">Perguntas Frequentes</a></li>
+                        <li><a href="../contact.html">Fale Conosco</a></li>
+                        <li><a href="../returns.html">Trocas e Devoluções</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Minha Conta</h3>
+                    <ul>
+                        <li><a href="../admin/login.html">Meus Pedidos</a></li>
+                        <li><a href="../admin/login.html">Meus Dados</a></li>
+                        <li><a href="../admin/login.html">Meus Favoritos</a></li>
+                        <li><a href="../admin/login.html">Rastrear Pedido</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Formas de Pagamento</h3>
+                    <p>Cartões de Crédito, Boleto, Pix</p>
+                    <h3>Redes Sociais</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Skylife Tecnologias - Todos os direitos reservados</p>
+            </div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { getProductsByCategory, getAllCategories } from '../js/products.js';
+        
+        // Função para formatar valores monetários
+        function formatCurrency(value) {
+            return `R$${parseFloat(value).toFixed(2).replace('.', ',')}`;
+        }
+        
+        // Função para criar um card de produto
+        function createProductCard(product) {
+            const card = document.createElement('div');
+            card.className = 'product-card';
+            
+            const hasDiscount = product.original_price && product.original_price > product.price;
+            
+            card.innerHTML = `
+                <div class="product-image">
+                    <img src="${product.image_url || 'https://via.placeholder.com/300x300'}" alt="${product.name}">
+                </div>
+                <div class="product-info">
+                    <h3 class="product-title">${product.name}</h3>
+                    <div class="product-price">
+                        ${hasDiscount ? `<span class="original-price">${formatCurrency(product.original_price)}</span>` : ''}
+                        <span class="current-price">${formatCurrency(product.price)}</span>
+                    </div>
+                    <div class="product-actions">
+                        <div class="quantity">
+                            <button class="decrease-qty">-</button>
+                            <input type="text" value="1" class="qty-input">
+                            <button class="increase-qty">+</button>
+                        </div>
+                        <button class="buy-button" data-product-id="${product.id}">Comprar</button>
+                    </div>
+                </div>
+            `;
+            
+            // Configurar eventos dos botões de quantidade
+            const decreaseBtn = card.querySelector('.decrease-qty');
+            const increaseBtn = card.querySelector('.increase-qty');
+            const qtyInput = card.querySelector('.qty-input');
+            
+            decreaseBtn.addEventListener('click', function() {
+                let qty = parseInt(qtyInput.value);
+                if (qty > 1) {
+                    qtyInput.value = qty - 1;
+                }
+            });
+            
+            increaseBtn.addEventListener('click', function() {
+                let qty = parseInt(qtyInput.value);
+                qtyInput.value = qty + 1;
+            });
+            
+            // Configurar evento do botão de compra
+            const buyButton = card.querySelector('.buy-button');
+            buyButton.addEventListener('click', function() {
+                const productId = this.dataset.productId;
+                const quantity = parseInt(qtyInput.value);
+                
+                // Adicionar ao carrinho (simulação)
+                addToCart(productId, quantity);
+                
+                alert(`Produto "${product.name}" adicionado ao carrinho!`);
+            });
+            
+            return card;
+        }
+        
+        // Função para adicionar ao carrinho (simulação)
+        function addToCart(productId, quantity) {
+            // Atualiza o contador do carrinho
+            const cartCount = document.getElementById('cartCount');
+            cartCount.textContent = parseInt(cartCount.textContent) + quantity;
+            
+            // Em um sistema real, isso seria implementado com o Supabase
+            console.log(`Produto ${productId} adicionado ao carrinho, quantidade: ${quantity}`);
+        }
+        
+        // Função para carregar produtos
+        async function loadProducts() {
+            try {
+                // Busca todos os produtos da categoria Hardware (ID 1)
+                const result = await getProductsByCategory(1);
+                
+                if (result.success) {
+                    displayProducts(result.products);
+                } else {
+                    throw new Error(result.error);
+                }
+            } catch (error) {
+                console.error('Erro ao carregar produtos:', error);
+                
+                // Exibe produtos de exemplo para demonstração
+                displayExampleProducts();
+            }
+        }
+        
+        // Função para exibir produtos
+        function displayProducts(products) {
+            const container = document.getElementById('products-grid');
+            const loading = document.getElementById('productsLoading');
+            
+            // Oculta o indicador de carregamento
+            loading.style.display = 'none';
+            
+            if (products.length === 0) {
+                container.innerHTML = '<p style="grid-column: 1 / -1; text-align: center;">Nenhum produto encontrado nesta categoria.</p>';
+                return;
+            }
+            
+            // Limpa o container
+            container.innerHTML = '';
+            
+            // Adiciona os produtos
+            products.forEach(product => {
+                const card = createProductCard(product);
+                container.appendChild(card);
+            });
+        }
+        
+        // Função para exibir produtos de exemplo
+        function displayExampleProducts() {
+            // Produtos de exemplo para hardware
+            const products = [
+                { id: 1, name: 'Processador Intel Core i5-12400F', price: 1099.90, image_url: 'https://via.placeholder.com/300x300?text=Processador+i5' },
+                { id: 2, name: 'Placa-mãe Asus Prime B660M-A', price: 899.90, image_url: 'https://via.placeholder.com/300x300?text=Placa-mãe+Asus' },
+                { id: 3, name: 'Memória RAM Corsair Vengeance 16GB DDR4 3200MHz', price: 349.90, image_url: 'https://via.placeholder.com/300x300?text=Memória+RAM' },
+                { id: 4, name: 'Placa de Vídeo NVIDIA GeForce RTX 3060 12GB', price: 2799.90, image_url: 'https://via.placeholder.com/300x300?text=RTX+3060' },
+                { id: 5, name: 'SSD Kingston NV2 1TB M.2 NVMe', price: 499.90, image_url: 'https://via.placeholder.com/300x300?text=SSD+Kingston' },
+                { id: 6, name: 'Fonte Corsair CV650 650W 80 Plus Bronze', price: 399.90, image_url: 'https://via.placeholder.com/300x300?text=Fonte+Corsair' },
+                { id: 7, name: 'Gabinete Corsair 4000D Airflow', price: 599.90, image_url: 'https://via.placeholder.com/300x300?text=Gabinete+Corsair' },
+                { id: 8, name: 'Cooler para Processador DeepCool AK620', price: 299.90, image_url: 'https://via.placeholder.com/300x300?text=Cooler+DeepCool' }
+            ];
+            
+            // Exibe produtos
+            displayProducts(products);
+        }
+        
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', function() {
+            // Carrega os produtos
+            loadProducts();
+            
+            // Configura eventos de filtro
+            document.getElementById('sortOrder').addEventListener('change', function() {
+                // Implementar ordenação
+                loadProducts();
+            });
+            
+            document.getElementById('subcategory').addEventListener('change', function() {
+                // Implementar filtragem por subcategoria
+                loadProducts();
+            });
+        });
+    </script>
+</body>
+</html>

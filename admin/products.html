@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>Painel de Produtos</title>
+  <link rel="stylesheet" href="../css/style.css" />
+  <style>
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: left; }
+    img { width: 80px; height: auto; border-radius: 6px; }
+    .actions button { margin-right: 5px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Gerenciar Produtos</h1>
+    <table id="productsTable">
+      <thead>
+        <tr>
+          <th>Imagem</th>
+          <th>Nome</th>
+          <th>Categoria</th>
+          <th>Preço</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Conteúdo preenchido por JS -->
+      </tbody>
+    </table>
+  </div>
+
+  <script type="module">
+    import { getAllProducts, deleteProduct } from '../js/products.js';
+
+    async function renderProducts() {
+      const { success, products, error } = await getAllProducts();
+
+      if (!success) {
+        alert('Erro ao buscar produtos: ' + error);
+        return;
+      }
+
+      const tbody = document.querySelector('#productsTable tbody');
+      tbody.innerHTML = '';
+
+      products.forEach(prod => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td><img src="${prod.image_url || '../images/avatar-default.png'}" onerror="this.src='../images/avatar-default.png'" /></td>
+          <td>${prod.name}</td>
+          <td>${prod.categories?.name || 'Sem categoria'}</td>
+          <td>R$ ${parseFloat(prod.price).toFixed(2)}</td>
+          <td class="actions">
+            <button onclick="editProduct('${prod.id}')">Editar</button>
+            <button onclick="confirmDelete('${prod.id}')">Excluir</button>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    window.editProduct = function (id) {
+      alert('Abrir modal de edição para produto ID: ' + id);
+      // Aqui você pode abrir uma modal ou redirecionar
+    };
+
+    window.confirmDelete = async function (id) {
+      const confirmar = confirm('Tem certeza que deseja excluir este produto?');
+      if (!confirmar) return;
+
+      const { success, error } = await deleteProduct(id);
+      if (success) {
+        alert('Produto excluído com sucesso!');
+        renderProducts();
+      } else {
+        alert('Erro ao excluir: ' + error);
+      }
+    };
+
+    window.addEventListener('DOMContentLoaded', renderProducts);
+  </script>
+</body>
+</html>
